@@ -3,13 +3,13 @@ import java.util.Vector;
 
 class Kyokumen implements Constants,Cloneable {
 
-  // ”Õ–Ê
+  // ç›¤é¢
   int ban[][];
 
-  // ‚¿‹î
+  // æŒã¡é§’
   Vector hand[];
   
-  // è”Ô
+  // æ‰‹ç•ª
   int teban=SENTE;
   
   public Kyokumen() {
@@ -19,142 +19,142 @@ class Kyokumen implements Constants,Cloneable {
     hand[1]=new Vector();
   }
   
-  // ‹Ç–Ê‚ÌƒRƒs[‚ğs‚¤
+  // å±€é¢ã®ã‚³ãƒ”ãƒ¼ã‚’è¡Œã†
   public Object clone() {
     Kyokumen k=new Kyokumen();
 
-    // ”Õ–Ê‚ÌƒRƒs[
+    // ç›¤é¢ã®ã‚³ãƒ”ãƒ¼
     for(int suji=0;suji<11;suji++) {
       for(int dan=0;dan<11;dan++) {
         k.ban[suji][dan]=ban[suji][dan];
       }
     }
     
-    // ‚¿‹î‚ÌƒRƒs[
+    // æŒã¡é§’ã®ã‚³ãƒ”ãƒ¼
     k.hand[0]=(Vector)hand[0].clone();
     k.hand[1]=(Vector)hand[1].clone();
     
-    // è”Ô‚ÌƒRƒs[
+    // æ‰‹ç•ªã®ã‚³ãƒ”ãƒ¼
     k.teban=teban;
     
     return k;
   }
   
-  // ‹Ç–Ê‚ª“¯ˆê‚©‚Ç‚¤‚©
+  // å±€é¢ãŒåŒä¸€ã‹ã©ã†ã‹
   public boolean equals(Object o) {
     Kyokumen k=(Kyokumen)o;
     if (k==null) return false;
     return equals(k);
   }
 
-  // ‹Ç–Ê‚ª“¯ˆê‚©‚Ç‚¤‚©
+  // å±€é¢ãŒåŒä¸€ã‹ã©ã†ã‹
   public boolean equals(Kyokumen k) {
-    // è”Ô‚Ì”äŠr
+    // æ‰‹ç•ªã®æ¯”è¼ƒ
     if (teban!=k.teban) {
       return false;
     }
     
-    // ”Õ–Ê‚Ì”äŠr
-    // Šeƒ}ƒX‚É‚Â‚¢‚Äc
+    // ç›¤é¢ã®æ¯”è¼ƒ
+    // å„ãƒã‚¹ã«ã¤ã„ã¦â€¦
     for(int suji=1;suji<=9;suji++) {
       for(int dan=1;dan<=9;dan++) {
-        // ”Õ–Êã‚Ì‹Ø‚Æ’i‚É‚ ‚é‹î‚ªA”äŠr‘ÎÛ‚Ì”Õ–Êã‚Ì“¯‚¶ˆÊ’u‚É‚ ‚é‹î‚Æ
-        // “¯‚¶‚©‚Ç‚¤‚©”äŠr‚·‚éB
+        // ç›¤é¢ä¸Šã®ç­‹ã¨æ®µã«ã‚ã‚‹é§’ãŒã€æ¯”è¼ƒå¯¾è±¡ã®ç›¤é¢ä¸Šã®åŒã˜ä½ç½®ã«ã‚ã‚‹é§’ã¨
+        // åŒã˜ã‹ã©ã†ã‹æ¯”è¼ƒã™ã‚‹ã€‚
         if (!(ban[suji][dan]==k.ban[suji][dan])) {
-          // ˆá‚Á‚Ä‚¢‚½‚çAfalse‚ğ•Ô‚·B
+          // é•ã£ã¦ã„ãŸã‚‰ã€falseã‚’è¿”ã™ã€‚
           return false;
         }
       }
     }
     
-    // ‚¿‹î‚Ì”äŠr
-    // ‹î‚Ìí—Ş‚²‚Æ‚É–‡”‚ª“¯‚¶‚©‚Ç‚¤‚©‚ğ”äŠr‚µ‚Ä‚İ‚éB
-    // ”äŠr—p‚Ì”z—ñ‚ğ€”õB
+    // æŒã¡é§’ã®æ¯”è¼ƒ
+    // é§’ã®ç¨®é¡ã”ã¨ã«æšæ•°ãŒåŒã˜ã‹ã©ã†ã‹ã‚’æ¯”è¼ƒã—ã¦ã¿ã‚‹ã€‚
+    // æ¯”è¼ƒç”¨ã®é…åˆ—ã‚’æº–å‚™ã€‚
     int handSente[]=new int[Koma.HI+1];
     int handGote []=new int[Koma.HI+1];
     int compareHandSente[]=new int[Koma.HI+1];
     int compareHandGote []=new int[Koma.HI+1];
 
-    // Še”z—ñ‚Í0‚Å‰Šú‰»‚³‚ê‚Ä‚¢‚éB
-    // hand‚ÉŒ»‚ê‚½‹î‚ğA‹î‚Ìí—Ş–ˆ‚É”‚¦‚Ä‚¢‚­B
+    // å„é…åˆ—ã¯0ã§åˆæœŸåŒ–ã•ã‚Œã¦ã„ã‚‹ã€‚
+    // handã«ç¾ã‚ŒãŸé§’ã‚’ã€é§’ã®ç¨®é¡æ¯ã«æ•°ãˆã¦ã„ãã€‚
 
-    // ‚Ü‚¸A©•ª‚Ìæè‚Ì‚¿‹î
+    // ã¾ãšã€è‡ªåˆ†ã®å…ˆæ‰‹ã®æŒã¡é§’
     for(int i=0;i<hand[0].size();i++) {
       Integer koma=(Integer)hand[0].elementAt(i);
       int komaShu=Koma.getKomashu(koma.intValue());
       handSente[komaShu]++;
     }
-    // ©•ª‚ÌŒãè‚Ì‚¿‹î
+    // è‡ªåˆ†ã®å¾Œæ‰‹ã®æŒã¡é§’
     for(int i=0;i<hand[1].size();i++) {
       Integer koma=(Integer)hand[1].elementAt(i);
       int komaShu=Koma.getKomashu(koma.intValue());
       handGote[komaShu]++;
     }
 
-    // ”äŠr‘ÎÛ‚Ìæè‚Ì‚¿‹î
+    // æ¯”è¼ƒå¯¾è±¡ã®å…ˆæ‰‹ã®æŒã¡é§’
     for(int i=0;i<k.hand[0].size();i++) {
       Integer koma=(Integer)k.hand[0].elementAt(i);
       int komaShu=Koma.getKomashu(koma.intValue());
       compareHandSente[komaShu]++;
     }
-    // ”äŠr‘ÎÛ‚ÌŒãè‚Ì‚¿‹î
+    // æ¯”è¼ƒå¯¾è±¡ã®å¾Œæ‰‹ã®æŒã¡é§’
     for(int i=0;i<k.hand[1].size();i++) {
       Integer koma=(Integer)k.hand[1].elementAt(i);
       int komaShu=Koma.getKomashu(koma.intValue());
       compareHandGote[komaShu]++;
     }
     
-    // ‚¿‹î‚Ì–‡”‚ğ”äŠr‚·‚éB
+    // æŒã¡é§’ã®æšæ•°ã‚’æ¯”è¼ƒã™ã‚‹ã€‚
     for(int i=Koma.FU;i<=Koma.HI;i++) {
       if (handSente[i]!=compareHandSente[i]) return false;
       if (handGote [i]!=compareHandGote [i]) return false;
     }
     
-    // Š®‘S‚Éˆê’v‚µ‚½B
+    // å®Œå…¨ã«ä¸€è‡´ã—ãŸã€‚
     return true;
   }
   
-  // ‚ ‚éˆÊ’u‚É‚ ‚é‹î‚ğæ“¾‚·‚é
+  // ã‚ã‚‹ä½ç½®ã«ã‚ã‚‹é§’ã‚’å–å¾—ã™ã‚‹
   public int get(Position p) {
-    // ”ÕŠO‚È‚çAu”ÕŠO•Çv‚ğ•Ô‚·
+    // ç›¤å¤–ãªã‚‰ã€ã€Œç›¤å¤–ï¼å£ã€ã‚’è¿”ã™
     if (p.suji<1 || 9<p.suji || p.dan<1 || 9<p.dan) {
       return Koma.WALL;
     }
     return ban[p.suji][p.dan];
   }
   
-  // ‚ ‚éˆÊ’u‚É‚ ‚é‹î‚ğ’u‚­B
+  // ã‚ã‚‹ä½ç½®ã«ã‚ã‚‹é§’ã‚’ç½®ãã€‚
   public void put(Position p,int koma) {
     ban[p.suji][p.dan]=koma;
   }
 
-  // —^‚¦‚ç‚ê‚½è‚Åˆêèi‚ß‚Ä‚İ‚éB
+  // ä¸ãˆã‚‰ã‚ŒãŸæ‰‹ã§ä¸€æ‰‹é€²ã‚ã¦ã¿ã‚‹ã€‚
   public void move(Te te) {
-    // ‹î‚Ìs‚«æ‚É‹î‚ª‚ ‚Á‚½‚È‚çc
+    // é§’ã®è¡Œãå…ˆã«é§’ãŒã‚ã£ãŸãªã‚‰â€¦
     if (get(te.to)!=Koma.EMPTY) {
-      // ‚¿‹î‚É‚·‚é
+      // æŒã¡é§’ã«ã™ã‚‹
       if (Koma.isSente(get(te.to))) {
-        // æ‚Á‚½‹î‚ªæè‚Ì‹î‚È‚çŒãè‚Ì‚¿‹î‚ÉB
+        // å–ã£ãŸé§’ãŒå…ˆæ‰‹ã®é§’ãªã‚‰å¾Œæ‰‹ã®æŒã¡é§’ã«ã€‚
         int koma=get(te.to);
-        // ¬‚è‚È‚Ç‚Ìƒtƒ‰ƒOAæèEŒãè‚Ì‹î‚Ìƒtƒ‰ƒO‚ğƒNƒŠƒAB
+        // æˆã‚Šãªã©ã®ãƒ•ãƒ©ã‚°ã€å…ˆæ‰‹ãƒ»å¾Œæ‰‹ã®é§’ã®ãƒ•ãƒ©ã‚°ã‚’ã‚¯ãƒªã‚¢ã€‚
         koma=koma & 0x07;
-        // Œãè‚Ì‹î‚Æ‚µ‚Ä‚Ìƒtƒ‰ƒO‚ğƒZƒbƒg
+        // å¾Œæ‰‹ã®é§’ã¨ã—ã¦ã®ãƒ•ãƒ©ã‚°ã‚’ã‚»ãƒƒãƒˆ
         koma=koma | GOTE;
         hand[1].add(new Integer(koma));
       } else {
-        // æ‚Á‚½‹î‚ªŒãè‚Ì‹î‚È‚çæè‚Ì‚¿‹î‚ÉB
+        // å–ã£ãŸé§’ãŒå¾Œæ‰‹ã®é§’ãªã‚‰å…ˆæ‰‹ã®æŒã¡é§’ã«ã€‚
         int koma=get(te.to);
-        // ¬‚è‚È‚Ç‚Ìƒtƒ‰ƒOAæèEŒãè‚Ì‹î‚Ìƒtƒ‰ƒO‚ğƒNƒŠƒAB
+        // æˆã‚Šãªã©ã®ãƒ•ãƒ©ã‚°ã€å…ˆæ‰‹ãƒ»å¾Œæ‰‹ã®é§’ã®ãƒ•ãƒ©ã‚°ã‚’ã‚¯ãƒªã‚¢ã€‚
         koma=koma & 0x07;
-        // æè‚Ì‹î‚Æ‚µ‚Ä‚Ìƒtƒ‰ƒO‚ğƒZƒbƒg
+        // å…ˆæ‰‹ã®é§’ã¨ã—ã¦ã®ãƒ•ãƒ©ã‚°ã‚’ã‚»ãƒƒãƒˆ
         koma=koma | SENTE;
         hand[0].add(new Integer(koma));
       }
     }
     if (te.from.suji==0) {
-      // ‚¿‹î‚ğ‘Å‚Á‚½
+      // æŒã¡é§’ã‚’æ‰“ã£ãŸ
       if (Koma.isSente(te.koma)) {
-        // æè‚Ì‹î‚È‚çAæè‚Ì‚¿‹î‚ğŒ¸‚ç‚·B
+        // å…ˆæ‰‹ã®é§’ãªã‚‰ã€å…ˆæ‰‹ã®æŒã¡é§’ã‚’æ¸›ã‚‰ã™ã€‚
         for(int i=0;i<hand[0].size();i++) {
           int koma=((Integer)hand[0].elementAt(i)).intValue();
           if (koma==te.koma) {
@@ -163,7 +163,7 @@ class Kyokumen implements Constants,Cloneable {
           }
         }
       } else {
-        // Œãè‚Ì‹î‚ğ‘Å‚Á‚½‚Í‚¸‚È‚Ì‚ÅAŒãè‚Ì‚¿‹î‚ğŒ¸‚ç‚·
+        // å¾Œæ‰‹ã®é§’ã‚’æ‰“ã£ãŸã¯ãšãªã®ã§ã€å¾Œæ‰‹ã®æŒã¡é§’ã‚’æ¸›ã‚‰ã™
         for(int i=0;i<hand[1].size();i++) {
           int koma=((Integer)hand[1].elementAt(i)).intValue();
           if (koma==te.koma) {
@@ -173,38 +173,38 @@ class Kyokumen implements Constants,Cloneable {
         }
       }
     } else {
-      // ”Õã‚Ì‹î‚ği‚ß‚½¨Œ³‚ÌˆÊ’u‚ÍAEMPTY‚ÉB
+      // ç›¤ä¸Šã®é§’ã‚’é€²ã‚ãŸâ†’å…ƒã®ä½ç½®ã¯ã€EMPTYã«ã€‚
       put(te.from,Koma.EMPTY);
     }
-    // ‹î‚ğˆÚ“®æ‚Éi‚ß‚éB
+    // é§’ã‚’ç§»å‹•å…ˆã«é€²ã‚ã‚‹ã€‚
     int koma=te.koma;
     if (te.promote) {
-      // u¬‚èv‚Ìˆ—
+      // ã€Œæˆã‚Šã€ã®å‡¦ç†
       koma=koma|Koma.PROMOTE;
     }
     put(te.to,koma);
   }
   
-  // ‹Ê‚ğ’T‚µ‚ÄAˆÊ’u‚ğ•Ô‚·
+  // ç‰ã‚’æ¢ã—ã¦ã€ä½ç½®ã‚’è¿”ã™
   public Position searchGyoku(int teban) {
-    // ’T‚·‹î‚ÍAteban‘¤‚Ì‹Ê
+    // æ¢ã™é§’ã¯ã€tebanå´ã®ç‰
     int toSearch=teban|Koma.OU;
-    // ‹ØA’i‚Åƒ‹[ƒv
+    // ç­‹ã€æ®µã§ãƒ«ãƒ¼ãƒ—
     for(int suji=1;suji<=9;suji++) {
       for(int dan=1;dan<=9;dan++) {
         if (ban[suji][dan]==toSearch) {
-          // Œ©‚Â‚©‚Á‚½ˆÊ’u‚ğ•Ô‚·B
+          // è¦‹ã¤ã‹ã£ãŸä½ç½®ã‚’è¿”ã™ã€‚
           return new Position(suji,dan);
         }
       }
     }
-    // Œ©‚Â‚©‚ç‚È‚©‚Á‚½cB
-    // ‹î‚Ì—˜‚«‚Ì“Í‚©‚È‚¢”ÕŠO‚ğ•Ô‚·B
-    // 0,0‚È‚Ç‚Éİ’è‚·‚é‚ÆA‚Pˆê‚É‚¢‚é‘Šè‹î‚Ì—˜‚«‚ğŒ©‚Â‚¯‚Ä‚µ‚Ü‚¤‰Â”\«‚ª‚ ‚éB
+    // è¦‹ã¤ã‹ã‚‰ãªã‹ã£ãŸâ€¦ã€‚
+    // é§’ã®åˆ©ãã®å±Šã‹ãªã„ç›¤å¤–ã‚’è¿”ã™ã€‚
+    // 0,0ãªã©ã«è¨­å®šã™ã‚‹ã¨ã€ï¼‘ä¸€ã«ã„ã‚‹ç›¸æ‰‹é§’ã®åˆ©ãã‚’è¦‹ã¤ã‘ã¦ã—ã¾ã†å¯èƒ½æ€§ãŒã‚ã‚‹ã€‚
     return new Position(-2,-2);
   }
   
-  // CSAŒ`®‚ÌŠû•ˆƒtƒ@ƒCƒ‹•¶š—ñ
+  // CSAå½¢å¼ã®æ£‹è­œãƒ•ã‚¡ã‚¤ãƒ«æ–‡å­—åˆ—
   static final String csaKomaTbl[] = {
     "   ","FU","KY","KE","GI","KI","KA","HI",
     "OU","TO","NY","NK ","NG","","UM","RY",
@@ -215,21 +215,21 @@ class Kyokumen implements Constants,Cloneable {
   };
 
   
-  // CSAŒ`®‚ÌŠû•ˆƒtƒ@ƒCƒ‹‚©‚çA‹Ç–Ê‚ğ“Ç‚İ‚Ş
+  // CSAå½¢å¼ã®æ£‹è­œãƒ•ã‚¡ã‚¤ãƒ«ã‹ã‚‰ã€å±€é¢ã‚’èª­ã¿è¾¼ã‚€
   public void ReadCsaKifu(String[] csaKifu) {
-    // ‚¿‹îc–‡”‚Ì”z—ñ‚É‚µ‚Ä‚¨‚­B
+    // æŒã¡é§’â€¦æšæ•°ã®é…åˆ—ã«ã—ã¦ãŠãã€‚
     int motigoma[][]=new int[2][Koma.HI+1];
 
-    // ‹î” ‚É“ü‚Á‚Ä‚¢‚éc‚è‚Ì‹îBc‚è‚ğ‘S‚Ä‚¿‹î‚É‚·‚éÛ‚È‚Ç‚Ég—p‚·‚éB
+    // é§’ç®±ã«å…¥ã£ã¦ã„ã‚‹æ®‹ã‚Šã®é§’ã€‚æ®‹ã‚Šã‚’å…¨ã¦æŒã¡é§’ã«ã™ã‚‹éš›ãªã©ã«ä½¿ç”¨ã™ã‚‹ã€‚
     int restKoma[]=new int[Koma.HI+1];
     
-    // ‚¿‹î‚ğ‹ó‚ÉB
+    // æŒã¡é§’ã‚’ç©ºã«ã€‚
     for (int i = 0; i <= Koma.HI; i++) {
       motigoma[0][i] = 0;
       motigoma[1][i] = 0;
     }
 
-    // ‹î” ‚É“ü‚Á‚Ä‚¢‚é‹î‚»‚Ìí—Ş‚Ì‹î‚Ì–‡”
+    // é§’ç®±ã«å…¥ã£ã¦ã„ã‚‹é§’ï¼ãã®ç¨®é¡ã®é§’ã®æšæ•°
     restKoma[Koma.FU]=18;
     restKoma[Koma.KY]=4;
     restKoma[Koma.KE]=4;
@@ -238,25 +238,25 @@ class Kyokumen implements Constants,Cloneable {
     restKoma[Koma.KA]=2;
     restKoma[Koma.HI]=2;
     
-    // ”Õ–Ê‚ğ‹ó‚É‰Šú‰»
+    // ç›¤é¢ã‚’ç©ºã«åˆæœŸåŒ–
     for(int suji=1;suji<=9;suji++) {
       for(int dan=1;dan<=9;dan++) {
         ban[suji][dan]=Koma.EMPTY;
       }
     }
     
-    // •¶š—ñ‚©‚ç“Ç‚İ‚İ
+    // æ–‡å­—åˆ—ã‹ã‚‰èª­ã¿è¾¼ã¿
     for(int i=0;i<csaKifu.length;i++) {
       String line=csaKifu[i];
       System.out.println(""+i+" :"+line);
       if (line.startsWith("P+")) {
         if (line.equals("P+00AL")) {
-          // c‚è‚Ì‹î‚Í‘S•”æè‚Ì‚¿‹î
+          // æ®‹ã‚Šã®é§’ã¯å…¨éƒ¨å…ˆæ‰‹ã®æŒã¡é§’
           for(int koma=Koma.FU;koma<=Koma.HI;koma++) {
             motigoma[0][koma]=restKoma[koma];
           }
         } else {
-          // æè‚Ì‚¿‹î
+          // å…ˆæ‰‹ã®æŒã¡é§’
           for(int j=0;j<=line.length()-6;j+=4) {
             int koma=0;
             String komaStr=line.substring(j+2+2,j+2+4);
@@ -271,12 +271,12 @@ class Kyokumen implements Constants,Cloneable {
         }
       } else if (line.startsWith("P-")) {
         if (line.equals("P-00AL")) {
-          // c‚è‚Ì‹î‚Í‘S•”Œãè‚Ì‚¿‹î
+          // æ®‹ã‚Šã®é§’ã¯å…¨éƒ¨å¾Œæ‰‹ã®æŒã¡é§’
           for(int koma=Koma.FU;koma<=Koma.HI;koma++) {
             motigoma[1][koma]=restKoma[koma];
           }
         } else {
-          // Œãè‚Ì‚¿‹î
+          // å¾Œæ‰‹ã®æŒã¡é§’
           for(int j=0;j<line.length();j+=4) {
             int koma=0;
             for(int k=Koma.FU;k<=Koma.HI;k++) {
@@ -289,27 +289,27 @@ class Kyokumen implements Constants,Cloneable {
           }
         }
       } else if (line.startsWith("P")) {
-        // ”Õ–Ê‚Ì•\Œ»
-        // P1`P9‚Ü‚ÅB
+        // ç›¤é¢ã®è¡¨ç¾
+        // P1ï½P9ã¾ã§ã€‚
         String danStr=line.substring(1,2);
         int dan=0;
         try {
           dan=Integer.parseInt(danStr);
         } catch(Exception e) {
-          // cˆ¬‚è‚Â‚Ô‚·‚±‚Æ‚É‚µ‚Ä‚¨‚­B
+          // â€¦æ¡ã‚Šã¤ã¶ã™ã“ã¨ã«ã—ã¦ãŠãã€‚
         }
         String komaStr;
         for(int suji=1;suji<=9;suji++) {
-          // ‚â‚â‚±‚µ‚¢‚ªA¶‘¤‚ª‚X‹ØA‰E‘¤‚ª‚P‹Øc
-          // •¶š—ñ‚Ì“ª‚Ì•û‚ª‚X‹Ø‚ÅAŒã‚ë‚Ì•û‚ª‚P‹ØB
-          // ‚»‚Ì‚½‚ßA“Ç‚İ‚İ‚Ì‚É‹t‚³‚É“Ç‚İ‚ŞB
+          // ã‚„ã‚„ã“ã—ã„ãŒã€å·¦å´ãŒï¼™ç­‹ã€å³å´ãŒï¼‘ç­‹â€¦
+          // æ–‡å­—åˆ—ã®é ­ã®æ–¹ãŒï¼™ç­‹ã§ã€å¾Œã‚ã®æ–¹ãŒï¼‘ç­‹ã€‚
+          // ãã®ãŸã‚ã€èª­ã¿è¾¼ã¿ã®æ™‚ã«é€†ã•ã«èª­ã¿è¾¼ã‚€ã€‚
           komaStr=line.substring(2+(9-suji)*3,2+(9-suji)*3+3);
           int koma=Koma.EMPTY;
           for(int k=Koma.EMPTY;k<=Koma.GRY;k++) {
             if (komaStr.equals(csaKomaTbl[k])) {
               koma=k;
-              // ¬‚Ìƒtƒ‰ƒO‚ğæ‚Á‚ÄAc‚è‚Ì‹î‚©‚ç
-              // ‚»‚Ìí—Ş‚Ì‹î‚ğˆê–‡‚Ğ‚¢‚Ä‚¨‚­B
+              // æˆã®ãƒ•ãƒ©ã‚°ã‚’å–ã£ã¦ã€æ®‹ã‚Šã®é§’ã‹ã‚‰
+              // ãã®ç¨®é¡ã®é§’ã‚’ä¸€æšã²ã„ã¦ãŠãã€‚
               restKoma[(Koma.getKomashu(koma) & ~Koma.PROMOTE)]--;
               break;
             }
@@ -322,7 +322,7 @@ class Kyokumen implements Constants,Cloneable {
         teban=SENTE;
       }
     }
-    // ‚¿‹î‚ğhand‚É‚µ‚Ü‚¤B
+    // æŒã¡é§’ã‚’handã«ã—ã¾ã†ã€‚
     for(int i=Koma.FU;i<Koma.HI;i++) {
       for(int j=0;j<motigoma[0][i];j++) {
         hand[0].add(new Integer(i|SENTE));
@@ -333,17 +333,17 @@ class Kyokumen implements Constants,Cloneable {
     }
   }
   
-  // ‹Ç–Ê‚ğ•\¦—p‚É•¶š—ñ‰»
+  // å±€é¢ã‚’è¡¨ç¤ºç”¨ã«æ–‡å­—åˆ—åŒ–
   public String toString() {
     String s="";
-    // Œãè‚¿‹î•\¦
-    s+="Œãè‚¿‹îF";
+    // å¾Œæ‰‹æŒã¡é§’è¡¨ç¤º
+    s+="å¾Œæ‰‹æŒã¡é§’ï¼š";
     for(int i=0;i<hand[1].size();i++) {
       s+=Koma.toString(((Integer)hand[1].elementAt(i)).intValue());
     }
     s+="\n";
-    // ”Õ–Ê•\¦
-    s+=" ‚X@‚W@‚V@‚U@‚T@‚S@‚R@‚Q@‚P\n";
+    // ç›¤é¢è¡¨ç¤º
+    s+=" ï¼™ã€€ï¼˜ã€€ï¼—ã€€ï¼–ã€€ï¼•ã€€ï¼”ã€€ï¼“ã€€ï¼’ã€€ï¼‘\n";
     s+="+---+---+---+---+---+---+---+---+---+\n";
     for(int dan=1;dan<=9;dan++) {
       for(int suji=9;suji>=1;suji--) {
@@ -355,8 +355,8 @@ class Kyokumen implements Constants,Cloneable {
       s+="\n";
       s+="+---+---+---+---+---+---+---+---+---+\n";
     }
-    // æè‚¿‹î•\¦
-    s+="æè‚¿‹îF";
+    // å…ˆæ‰‹æŒã¡é§’è¡¨ç¤º
+    s+="å…ˆæ‰‹æŒã¡é§’ï¼š";
     for(int i=0;i<hand[0].size();i++) {
       s+=Koma.toString(((Integer)hand[0].elementAt(i)).intValue());
     }
@@ -364,3 +364,4 @@ class Kyokumen implements Constants,Cloneable {
     return s;
   }
 }
+

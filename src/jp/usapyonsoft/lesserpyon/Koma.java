@@ -1,70 +1,70 @@
 package jp.usapyonsoft.lesserpyon;
 
-// ‹î
+// é§’
 class Koma implements Constants,Cloneable {
-  // ‹î‚Ìí—Ş‚Ì’è‹`
-  public static final int EMPTY=0;          // u‹óv
-  public static final int EMP=EMPTY;        // u‹óv‚Ì•Ê–¼B
-  public static final int PROMOTE=8;        // u¬‚èvƒtƒ‰ƒO
+  // é§’ã®ç¨®é¡ã®å®šç¾©
+  public static final int EMPTY=0;          // ã€Œç©ºã€
+  public static final int EMP=EMPTY;        // ã€Œç©ºã€ã®åˆ¥åã€‚
+  public static final int PROMOTE=8;        // ã€Œæˆã‚Šã€ãƒ•ãƒ©ã‚°
 
-  public static final int FU= 1;            // u•àv
-  public static final int KY= 2;            // uÔv
-  public static final int KE= 3;            // uŒj”nv
-  public static final int GI= 4;            // u‹âv
-  public static final int KI= 5;            // u‹àv
-  public static final int KA= 6;            // uŠpv
-  public static final int HI= 7;            // u”òÔv
-  public static final int OU= 8;            // u‹Ê«v
-  public static final int TO=FU+PROMOTE;    // u‚Æ‹àvu•àv{¬‚è
-  public static final int NY=KY+PROMOTE;    // u¬‚èvuÔv{¬‚è
-  public static final int NK=KE+PROMOTE;    // u¬‚èŒjvuŒj”nv{¬‚è
-  public static final int NG=GI+PROMOTE;    // u¬‚è‹âvu‹âv{¬‚è
-  public static final int UM=KA+PROMOTE;    // u”nvuŠpv{¬‚è
-  public static final int RY=HI+PROMOTE;    // u—³vu”òÔv{¬‚è
+  public static final int FU= 1;            // ã€Œæ­©ã€
+  public static final int KY= 2;            // ã€Œé¦™è»Šã€
+  public static final int KE= 3;            // ã€Œæ¡‚é¦¬ã€
+  public static final int GI= 4;            // ã€ŒéŠ€ã€
+  public static final int KI= 5;            // ã€Œé‡‘ã€
+  public static final int KA= 6;            // ã€Œè§’ã€
+  public static final int HI= 7;            // ã€Œé£›è»Šã€
+  public static final int OU= 8;            // ã€Œç‰å°†ã€
+  public static final int TO=FU+PROMOTE;    // ã€Œã¨é‡‘ã€ï¼ã€Œæ­©ã€ï¼‹æˆã‚Š
+  public static final int NY=KY+PROMOTE;    // ã€Œæˆã‚Šé¦™ã€ï¼ã€Œé¦™è»Šã€ï¼‹æˆã‚Š
+  public static final int NK=KE+PROMOTE;    // ã€Œæˆã‚Šæ¡‚ã€ï¼ã€Œæ¡‚é¦¬ã€ï¼‹æˆã‚Š
+  public static final int NG=GI+PROMOTE;    // ã€Œæˆã‚ŠéŠ€ã€ï¼ã€ŒéŠ€ã€ï¼‹æˆã‚Š
+  public static final int UM=KA+PROMOTE;    // ã€Œé¦¬ã€ï¼ã€Œè§’ã€ï¼‹æˆã‚Š
+  public static final int RY=HI+PROMOTE;    // ã€Œç«œã€ï¼ã€Œé£›è»Šã€ï¼‹æˆã‚Š
 
-  public static final int SFU=SENTE+FU;     // uæè‚Ì•àvu•àv{uæèv
-  public static final int SKY=SENTE+KY;     // uæè‚Ìv
-  public static final int SKE=SENTE+KE;     // uæè‚ÌŒjv
-  public static final int SGI=SENTE+GI;     // uæè‚Ì‹âv
-  public static final int SKI=SENTE+KI;     // uæè‚Ì‹àv
-  public static final int SKA=SENTE+KA;     // uæè‚ÌŠpv
-  public static final int SHI=SENTE+HI;     // uæè‚Ì”òv
-  public static final int SOU=SENTE+OU;     // uæè‚Ì‹Êv
-  public static final int STO=SENTE+TO;     // uæè‚Ì‚Æ‹àv
-  public static final int SNY=SENTE+NY;     // uæè‚Ì¬v
-  public static final int SNK=SENTE+NK;     // uæè‚Ì¬Œjv
-  public static final int SNG=SENTE+NG;     // uæè‚Ì¬‹âv
-  public static final int SUM=SENTE+UM;     // uæè‚Ì”nv
-  public static final int SRY=SENTE+RY;     // uæè‚Ì—³v
+  public static final int SFU=SENTE+FU;     // ã€Œå…ˆæ‰‹ã®æ­©ã€ï¼ã€Œæ­©ã€ï¼‹ã€Œå…ˆæ‰‹ã€
+  public static final int SKY=SENTE+KY;     // ã€Œå…ˆæ‰‹ã®é¦™ã€
+  public static final int SKE=SENTE+KE;     // ã€Œå…ˆæ‰‹ã®æ¡‚ã€
+  public static final int SGI=SENTE+GI;     // ã€Œå…ˆæ‰‹ã®éŠ€ã€
+  public static final int SKI=SENTE+KI;     // ã€Œå…ˆæ‰‹ã®é‡‘ã€
+  public static final int SKA=SENTE+KA;     // ã€Œå…ˆæ‰‹ã®è§’ã€
+  public static final int SHI=SENTE+HI;     // ã€Œå…ˆæ‰‹ã®é£›ã€
+  public static final int SOU=SENTE+OU;     // ã€Œå…ˆæ‰‹ã®ç‰ã€
+  public static final int STO=SENTE+TO;     // ã€Œå…ˆæ‰‹ã®ã¨é‡‘ã€
+  public static final int SNY=SENTE+NY;     // ã€Œå…ˆæ‰‹ã®æˆé¦™ã€
+  public static final int SNK=SENTE+NK;     // ã€Œå…ˆæ‰‹ã®æˆæ¡‚ã€
+  public static final int SNG=SENTE+NG;     // ã€Œå…ˆæ‰‹ã®æˆéŠ€ã€
+  public static final int SUM=SENTE+UM;     // ã€Œå…ˆæ‰‹ã®é¦¬ã€
+  public static final int SRY=SENTE+RY;     // ã€Œå…ˆæ‰‹ã®ç«œã€
 
-  public static final int GFU=GOTE +FU;     // uŒãè‚Ì•àvu•àv{uŒãèv
-  public static final int GKY=GOTE +KY;     // uŒãè‚Ìv
-  public static final int GKE=GOTE +KE;     // uŒãè‚ÌŒjv
-  public static final int GGI=GOTE +GI;     // uŒãè‚Ì‹âv
-  public static final int GKI=GOTE +KI;     // uŒãè‚Ì‹àv
-  public static final int GKA=GOTE +KA;     // uŒãè‚ÌŠpv
-  public static final int GHI=GOTE +HI;     // uŒãè‚Ì”òv
-  public static final int GOU=GOTE +OU;     // uŒãè‚Ì‹Êv
-  public static final int GTO=GOTE +TO;     // uŒãè‚Ì‚Æ‹àv
-  public static final int GNY=GOTE +NY;     // uŒãè‚Ì¬v
-  public static final int GNK=GOTE +NK;     // uŒãè‚Ì¬Œjv
-  public static final int GNG=GOTE +NG;     // uŒãè‚Ì¬‹âv
-  public static final int GUM=GOTE +UM;     // uŒãè‚Ì”nv
-  public static final int GRY=GOTE +RY;     // uŒãè‚Ì—³v
+  public static final int GFU=GOTE +FU;     // ã€Œå¾Œæ‰‹ã®æ­©ã€ï¼ã€Œæ­©ã€ï¼‹ã€Œå¾Œæ‰‹ã€
+  public static final int GKY=GOTE +KY;     // ã€Œå¾Œæ‰‹ã®é¦™ã€
+  public static final int GKE=GOTE +KE;     // ã€Œå¾Œæ‰‹ã®æ¡‚ã€
+  public static final int GGI=GOTE +GI;     // ã€Œå¾Œæ‰‹ã®éŠ€ã€
+  public static final int GKI=GOTE +KI;     // ã€Œå¾Œæ‰‹ã®é‡‘ã€
+  public static final int GKA=GOTE +KA;     // ã€Œå¾Œæ‰‹ã®è§’ã€
+  public static final int GHI=GOTE +HI;     // ã€Œå¾Œæ‰‹ã®é£›ã€
+  public static final int GOU=GOTE +OU;     // ã€Œå¾Œæ‰‹ã®ç‰ã€
+  public static final int GTO=GOTE +TO;     // ã€Œå¾Œæ‰‹ã®ã¨é‡‘ã€
+  public static final int GNY=GOTE +NY;     // ã€Œå¾Œæ‰‹ã®æˆé¦™ã€
+  public static final int GNK=GOTE +NK;     // ã€Œå¾Œæ‰‹ã®æˆæ¡‚ã€
+  public static final int GNG=GOTE +NG;     // ã€Œå¾Œæ‰‹ã®æˆéŠ€ã€
+  public static final int GUM=GOTE +UM;     // ã€Œå¾Œæ‰‹ã®é¦¬ã€
+  public static final int GRY=GOTE +RY;     // ã€Œå¾Œæ‰‹ã®ç«œã€
   
-  public static final int WALL=64;          // ”Õ‚ÌŠO‚ğ•\‚·‚½‚ß‚Ì’è”
+  public static final int WALL=64;          // ç›¤ã®å¤–ã‚’è¡¨ã™ãŸã‚ã®å®šæ•°
 
-  // æè‚Ì‹î‚©‚Ç‚¤‚©‚Ì”»’è
+  // å…ˆæ‰‹ã®é§’ã‹ã©ã†ã‹ã®åˆ¤å®š
   static public boolean isSente(int koma) {
     return (koma & SENTE)!=0;
   }
   
-  // Œãè‚Ì‹î‚©‚Ç‚¤‚©‚Ì”»’è
+  // å¾Œæ‰‹ã®é§’ã‹ã©ã†ã‹ã®åˆ¤å®š
   static public boolean isGote(int koma) {
     return (koma & GOTE)!=0;
   }
   
-  // è”Ô‚©‚çŒ©‚Ä©•ª‚Ì‹î‚©‚Ç‚¤‚©”»’è
+  // æ‰‹ç•ªã‹ã‚‰è¦‹ã¦è‡ªåˆ†ã®é§’ã‹ã©ã†ã‹åˆ¤å®š
   static public boolean isSelf(int teban,int koma) {
     if (teban==SENTE) {
       return isSente(koma);
@@ -73,7 +73,7 @@ class Koma implements Constants,Cloneable {
     }
   }
   
-  // è”Ô‚©‚çŒ©‚Ä‘Šè‚Ì‹î‚©‚Ç‚¤‚©”»’è
+  // æ‰‹ç•ªã‹ã‚‰è¦‹ã¦ç›¸æ‰‹ã®é§’ã‹ã©ã†ã‹åˆ¤å®š
   static public boolean isEnemy(int teban,int koma) {
     if (teban==SENTE) {
       return isGote(koma);
@@ -82,61 +82,62 @@ class Koma implements Constants,Cloneable {
     }
   }
   
-  // ‹î‚Ìí—Ş‚Ìæ“¾
+  // é§’ã®ç¨®é¡ã®å–å¾—
   static public int getKomashu(int koma) {
-    // æèŒãè‚Ìƒtƒ‰ƒO‚ğƒrƒbƒg‰‰Z‚Å‚È‚­‚¹‚Î—Ç‚¢B
+    // å…ˆæ‰‹å¾Œæ‰‹ã®ãƒ•ãƒ©ã‚°ã‚’ãƒ“ãƒƒãƒˆæ¼”ç®—ã§ãªãã›ã°è‰¯ã„ã€‚
     return koma & 0x0f;
   }
   
-  // ‹î‚Ì•¶š—ñ‰»—p‚Ì•¶š—ñ
+  // é§’ã®æ–‡å­—åˆ—åŒ–ç”¨ã®æ–‡å­—åˆ—
   static public final String komaString[]={
-    "@",
-    "•à",
-    "",
-    "Œj",
-    "‹â",
-    "‹à",
-    "Šp",
-    "”ò",
-    "‰¤",
-    "‚Æ",
-    "ˆÇ",
-    "Œ\",
-    "‘S",
+    "ã€€",
+    "æ­©",
+    "é¦™",
+    "æ¡‚",
+    "éŠ€",
+    "é‡‘",
+    "è§’",
+    "é£›",
+    "ç‹",
+    "ã¨",
+    "æ",
+    "åœ­",
+    "å…¨",
     "",
-    "”n",
-    "—³"
+    "é¦¬",
+    "ç«œ"
   };
   
-  // ‹î‚Ì•¶š—ñ‰»c”Õ–Ê‚Ì•\¦—p
+  // é§’ã®æ–‡å­—åˆ—åŒ–â€¦ç›¤é¢ã®è¡¨ç¤ºç”¨
   static public String toBanString(int koma) {
     if ( koma==EMPTY ) {
       return "   ";
     } else if ( (koma & SENTE) !=0 ) {
-      // æè‚Ì‹î‚É‚ÍA" "‚ğ“ª‚É’Ç‰Á
+      // å…ˆæ‰‹ã®é§’ã«ã¯ã€" "ã‚’é ­ã«è¿½åŠ 
       return " "+komaString[getKomashu(koma)];
     } else {
-      // Œãè‚Ì‹î‚É‚ÍA"v"‚ğ“ª‚É’Ç‰Á
+      // å¾Œæ‰‹ã®é§’ã«ã¯ã€"v"ã‚’é ­ã«è¿½åŠ 
       return "v"+komaString[getKomashu(koma)];
     }
   }
   
-  // ‹î‚Ì•¶š—ñ‰»c‚¿‹îAè‚È‚Ç‚Ì•\¦—p
+  // é§’ã®æ–‡å­—åˆ—åŒ–â€¦æŒã¡é§’ã€æ‰‹ãªã©ã®è¡¨ç¤ºç”¨
   static public String toString(int koma) {
     return komaString[getKomashu(koma)];
   }
   
-  // ‹î‚ª¬‚ê‚é‚©‚Ç‚¤‚©‚ğ•\‚·
+  // é§’ãŒæˆã‚Œã‚‹ã‹ã©ã†ã‹ã‚’è¡¨ã™
   public static final boolean canPromote[]={
-     false,false,false,false,false,false,false,false,// æè‚Å‚àŒãè‚Å‚à‚È‚¢‹î
-     false,false,false,false,false,false,false,false,// æè‚Å‚àŒãè‚Å‚à‚È‚¢‹î
-     false, true, true, true, true,false, true, true,// ‹óAæè‚Ì•àŒj‹â‹àŠp”ò
-     false,false,false,false,false,false,false,false,// æè‚Ì‰¤A‚ÆˆÇŒ\‘S@”n—³
-     false, true, true, true, true,false, true, true,// ‹óAŒãè‚Ì•àŒj‹â‹àŠp”ò
-     false,false,false,false,false,false,false,false // Œãè‚Ì‰¤A‚ÆˆÇŒ\‘S@”n—³
+     false,false,false,false,false,false,false,false,// å…ˆæ‰‹ã§ã‚‚å¾Œæ‰‹ã§ã‚‚ãªã„é§’
+     false,false,false,false,false,false,false,false,// å…ˆæ‰‹ã§ã‚‚å¾Œæ‰‹ã§ã‚‚ãªã„é§’
+     false, true, true, true, true,false, true, true,// ç©ºã€å…ˆæ‰‹ã®æ­©é¦™æ¡‚éŠ€é‡‘è§’é£›
+     false,false,false,false,false,false,false,false,// å…ˆæ‰‹ã®ç‹ã€ã¨æåœ­å…¨ã€€é¦¬ç«œ
+     false, true, true, true, true,false, true, true,// ç©ºã€å¾Œæ‰‹ã®æ­©é¦™æ¡‚éŠ€é‡‘è§’é£›
+     false,false,false,false,false,false,false,false // å¾Œæ‰‹ã®ç‹ã€ã¨æåœ­å…¨ã€€é¦¬ç«œ
   };
   
   static public boolean canPromote(int koma) {
     return canPromote[koma];
   }
 }
+

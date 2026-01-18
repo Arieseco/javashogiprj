@@ -1,223 +1,224 @@
 package jp.usapyonsoft.lesserpyon;
 
 public interface KomaMoves {
-  // ’Êí‚Ì‚W•ûŒü‚Ì’è‹`(”Õ–Êã‚Ì“®‚«)
+  // é€šå¸¸ã®ï¼˜æ–¹å‘ã®å®šç¾©(ç›¤é¢ä¸Šã®å‹•ã)
   // 
   //  5   6  7
-  //     ª
-  //  3©‹î¨4
-  //     «
+  //     â†‘
+  //  3â†é§’â†’4
+  //     â†“
   //  2   1  0
   //
-  // Œj”n”ò‚Ñ‚Ì•ûŒü‚Ì’è‹`(”Õ–Êã‚Ì“®‚«)
+  // æ¡‚é¦¬é£›ã³ã®æ–¹å‘ã®å®šç¾©(ç›¤é¢ä¸Šã®å‹•ã)
   //
   //   8    9
   //
-  //     Œj
+  //     æ¡‚
   //
   //   11  10
   
-  // •ûŒü‚Ì’è‹`‚É‰ˆ‚Á‚½Au’iv‚ÌˆÚ“®‚Ì’è‹`
+  // æ–¹å‘ã®å®šç¾©ã«æ²¿ã£ãŸã€ã€Œæ®µã€ã®ç§»å‹•ã®å®šç¾©
   public static final int diffDan[]={
      1, 1, 1, 0, 0,-1,-1,-1,-2,-2, 2, 2
   };
 
-  // •ûŒü‚Ì’è‹`‚É‰ˆ‚Á‚½Au‹Øv‚ÌˆÚ“®‚Ì’è‹`
+  // æ–¹å‘ã®å®šç¾©ã«æ²¿ã£ãŸã€ã€Œç­‹ã€ã®ç§»å‹•ã®å®šç¾©
   public static final int diffSuji[]={
     -1, 0, 1, 1,-1, 1, 0,-1, 1,-1,-1, 1
   };
 
-  // ‚ ‚é•ûŒü‚É‚ ‚é‹î‚ª“®‚¯‚é‚©‚Ç‚¤‚©‚ğ•\‚·ƒe[ƒuƒ‹B
-  // “Y‚¦š‚Ì‚P‚Â‚ß‚ª•ûŒü‚ÅA‚Q‚Â‚ß‚ª‹î‚Ìí—Ş‚Å‚ ‚éB
-  // Ô‚â”òÔAŠp‚È‚Ç‚Ìˆê’¼ü‚É“®‚­“®‚«‚É‚Â‚¢‚Ä‚ÍAŒãq‚ÌcanJump‚Å•\‚µA
-  // ‚±‚Ìƒe[ƒuƒ‹‚Å‚Ífalse‚Æ‚µ‚Ä‚¨‚­B
+  // ã‚ã‚‹æ–¹å‘ã«ã‚ã‚‹é§’ãŒå‹•ã‘ã‚‹ã‹ã©ã†ã‹ã‚’è¡¨ã™ãƒ†ãƒ¼ãƒ–ãƒ«ã€‚
+  // æ·»ãˆå­—ã®ï¼‘ã¤ã‚ãŒæ–¹å‘ã§ã€ï¼’ã¤ã‚ãŒé§’ã®ç¨®é¡ã§ã‚ã‚‹ã€‚
+  // é¦™è»Šã‚„é£›è»Šã€è§’ãªã©ã®ä¸€ç›´ç·šã«å‹•ãå‹•ãã«ã¤ã„ã¦ã¯ã€å¾Œè¿°ã®canJumpã§è¡¨ã—ã€
+  // ã“ã®ãƒ†ãƒ¼ãƒ–ãƒ«ã§ã¯falseã¨ã—ã¦ãŠãã€‚
   public static final boolean canMove[][]={
-    // •ûŒü 0 Î‚ß¶‰º‚Ö‚Ì“®‚«
+    // æ–¹å‘ 0 æ–œã‚å·¦ä¸‹ã¸ã®å‹•ã
     {
-     false,false,false,false,false,false,false,false,// æè‚Å‚àŒãè‚Å‚à‚È‚¢‹î
-     false,false,false,false,false,false,false,false,// æè‚Å‚àŒãè‚Å‚à‚È‚¢‹î
-     false,false,false,false, true,false,false,false,// ‹óAæè‚Ì•àŒj‹â‹àŠp”ò
-      true,false,false,false,false,false,false, true,// æè‚Ì‰¤A‚ÆˆÇŒ\‘S@”n—³
-     false,false,false,false, true, true,false,false,// ‹óAŒãè‚Ì•àŒj‹â‹àŠp”ò
-      true, true, true, true, true, true,false, true // Œãè‚Ì‰¤A‚ÆˆÇŒ\‘S@”n—³
+     false,false,false,false,false,false,false,false,// å…ˆæ‰‹ã§ã‚‚å¾Œæ‰‹ã§ã‚‚ãªã„é§’
+     false,false,false,false,false,false,false,false,// å…ˆæ‰‹ã§ã‚‚å¾Œæ‰‹ã§ã‚‚ãªã„é§’
+     false,false,false,false, true,false,false,false,// ç©ºã€å…ˆæ‰‹ã®æ­©é¦™æ¡‚éŠ€é‡‘è§’é£›
+      true,false,false,false,false,false,false, true,// å…ˆæ‰‹ã®ç‹ã€ã¨æåœ­å…¨ã€€é¦¬ç«œ
+     false,false,false,false, true, true,false,false,// ç©ºã€å¾Œæ‰‹ã®æ­©é¦™æ¡‚éŠ€é‡‘è§’é£›
+      true, true, true, true, true, true,false, true // å¾Œæ‰‹ã®ç‹ã€ã¨æåœ­å…¨ã€€é¦¬ç«œ
     },
-    // •ûŒü 1 ^‰º‚Ö‚Ì“®‚«
+    // æ–¹å‘ 1 çœŸä¸‹ã¸ã®å‹•ã
     {
-     false,false,false,false,false,false,false,false,// æè‚Å‚àŒãè‚Å‚à‚È‚¢‹î
-     false,false,false,false,false,false,false,false,// æè‚Å‚àŒãè‚Å‚à‚È‚¢‹î
-     false,false,false,false,false, true,false,false,// ‹óAæè‚Ì•àŒj‹â‹àŠp”ò
-      true, true, true, true, true,false, true,false,// æè‚Ì‰¤A‚ÆˆÇŒ\‘S@”n—³
-     false, true,false,false, true, true,false,false,// ‹óAŒãè‚Ì•àŒj‹â‹àŠp”ò
-      true, true, true, true, true,false, true,false // Œãè‚Ì‰¤A‚ÆˆÇŒ\‘S@”n—³
+     false,false,false,false,false,false,false,false,// å…ˆæ‰‹ã§ã‚‚å¾Œæ‰‹ã§ã‚‚ãªã„é§’
+     false,false,false,false,false,false,false,false,// å…ˆæ‰‹ã§ã‚‚å¾Œæ‰‹ã§ã‚‚ãªã„é§’
+     false,false,false,false,false, true,false,false,// ç©ºã€å…ˆæ‰‹ã®æ­©é¦™æ¡‚éŠ€é‡‘è§’é£›
+      true, true, true, true, true,false, true,false,// å…ˆæ‰‹ã®ç‹ã€ã¨æåœ­å…¨ã€€é¦¬ç«œ
+     false, true,false,false, true, true,false,false,// ç©ºã€å¾Œæ‰‹ã®æ­©é¦™æ¡‚éŠ€é‡‘è§’é£›
+      true, true, true, true, true,false, true,false // å¾Œæ‰‹ã®ç‹ã€ã¨æåœ­å…¨ã€€é¦¬ç«œ
     },
-    // •ûŒü 2 Î‚ß‰E‰º‚Ö‚Ì“®‚«
+    // æ–¹å‘ 2 æ–œã‚å³ä¸‹ã¸ã®å‹•ã
     {
-     false,false,false,false,false,false,false,false,// æè‚Å‚àŒãè‚Å‚à‚È‚¢‹î
-     false,false,false,false,false,false,false,false,// æè‚Å‚àŒãè‚Å‚à‚È‚¢‹î
-     false,false,false,false, true,false,false,false,// ‹óAæè‚Ì•àŒj‹â‹àŠp”ò
-      true,false,false,false,false,false,false, true,// æè‚Ì‰¤A‚ÆˆÇŒ\‘S@”n—³
-     false,false,false,false, true, true,false,false,// ‹óAŒãè‚Ì•àŒj‹â‹àŠp”ò
-      true, true, true, true, true, true,false, true // Œãè‚Ì‰¤A‚ÆˆÇŒ\‘S@”n—³
+     false,false,false,false,false,false,false,false,// å…ˆæ‰‹ã§ã‚‚å¾Œæ‰‹ã§ã‚‚ãªã„é§’
+     false,false,false,false,false,false,false,false,// å…ˆæ‰‹ã§ã‚‚å¾Œæ‰‹ã§ã‚‚ãªã„é§’
+     false,false,false,false, true,false,false,false,// ç©ºã€å…ˆæ‰‹ã®æ­©é¦™æ¡‚éŠ€é‡‘è§’é£›
+      true,false,false,false,false,false,false, true,// å…ˆæ‰‹ã®ç‹ã€ã¨æåœ­å…¨ã€€é¦¬ç«œ
+     false,false,false,false, true, true,false,false,// ç©ºã€å¾Œæ‰‹ã®æ­©é¦™æ¡‚éŠ€é‡‘è§’é£›
+      true, true, true, true, true, true,false, true // å¾Œæ‰‹ã®ç‹ã€ã¨æåœ­å…¨ã€€é¦¬ç«œ
     },
-    // •ûŒü 3 ¶‚Ö‚Ì“®‚«
+    // æ–¹å‘ 3 å·¦ã¸ã®å‹•ã
     {
-     false,false,false,false,false,false,false,false,// æè‚Å‚àŒãè‚Å‚à‚È‚¢‹î
-     false,false,false,false,false,false,false,false,// æè‚Å‚àŒãè‚Å‚à‚È‚¢‹î
-     false,false,false,false,false, true,false,false,// ‹óAæè‚Ì•àŒj‹â‹àŠp”ò
-      true, true, true, true, true,false, true,false,// æè‚Ì‰¤A‚ÆˆÇŒ\‘S@”n—³
-     false,false,false,false,false, true,false,false,// ‹óAŒãè‚Ì•àŒj‹â‹àŠp”ò
-      true, true, true, true, true,false, true,false // Œãè‚Ì‰¤A‚ÆˆÇŒ\‘S@”n—³
+     false,false,false,false,false,false,false,false,// å…ˆæ‰‹ã§ã‚‚å¾Œæ‰‹ã§ã‚‚ãªã„é§’
+     false,false,false,false,false,false,false,false,// å…ˆæ‰‹ã§ã‚‚å¾Œæ‰‹ã§ã‚‚ãªã„é§’
+     false,false,false,false,false, true,false,false,// ç©ºã€å…ˆæ‰‹ã®æ­©é¦™æ¡‚éŠ€é‡‘è§’é£›
+      true, true, true, true, true,false, true,false,// å…ˆæ‰‹ã®ç‹ã€ã¨æåœ­å…¨ã€€é¦¬ç«œ
+     false,false,false,false,false, true,false,false,// ç©ºã€å¾Œæ‰‹ã®æ­©é¦™æ¡‚éŠ€é‡‘è§’é£›
+      true, true, true, true, true,false, true,false // å¾Œæ‰‹ã®ç‹ã€ã¨æåœ­å…¨ã€€é¦¬ç«œ
     },
-    // •ûŒü 4 ‰E‚Ö‚Ì“®‚«
+    // æ–¹å‘ 4 å³ã¸ã®å‹•ã
     {
-     false,false,false,false,false,false,false,false,// æè‚Å‚àŒãè‚Å‚à‚È‚¢‹î
-     false,false,false,false,false,false,false,false,// æè‚Å‚àŒãè‚Å‚à‚È‚¢‹î
-     false,false,false,false,false, true,false,false,// ‹óAæè‚Ì•àŒj‹â‹àŠp”ò
-      true, true, true, true, true,false, true,false,// æè‚Ì‰¤A‚ÆˆÇŒ\‘S@”n—³
-     false,false,false,false,false, true,false,false,// ‹óAŒãè‚Ì•àŒj‹â‹àŠp”ò
-      true, true, true, true, true,false, true,false // Œãè‚Ì‰¤A‚ÆˆÇŒ\‘S@”n—³
+     false,false,false,false,false,false,false,false,// å…ˆæ‰‹ã§ã‚‚å¾Œæ‰‹ã§ã‚‚ãªã„é§’
+     false,false,false,false,false,false,false,false,// å…ˆæ‰‹ã§ã‚‚å¾Œæ‰‹ã§ã‚‚ãªã„é§’
+     false,false,false,false,false, true,false,false,// ç©ºã€å…ˆæ‰‹ã®æ­©é¦™æ¡‚éŠ€é‡‘è§’é£›
+      true, true, true, true, true,false, true,false,// å…ˆæ‰‹ã®ç‹ã€ã¨æåœ­å…¨ã€€é¦¬ç«œ
+     false,false,false,false,false, true,false,false,// ç©ºã€å¾Œæ‰‹ã®æ­©é¦™æ¡‚éŠ€é‡‘è§’é£›
+      true, true, true, true, true,false, true,false // å¾Œæ‰‹ã®ç‹ã€ã¨æåœ­å…¨ã€€é¦¬ç«œ
     },
-    // •ûŒü 5 Î‚ß¶ã‚Ö‚Ì“®‚«
+    // æ–¹å‘ 5 æ–œã‚å·¦ä¸Šã¸ã®å‹•ã
     {
-     false,false,false,false,false,false,false,false,// æè‚Å‚àŒãè‚Å‚à‚È‚¢‹î
-     false,false,false,false,false,false,false,false,// æè‚Å‚àŒãè‚Å‚à‚È‚¢‹î
-     false,false,false,false, true, true,false,false,// ‹óAæè‚Ì•àŒj‹â‹àŠp”ò
-      true, true, true, true, true,false,false, true,// æè‚Ì‰¤A‚ÆˆÇŒ\‘S@”n—³
-     false,false,false,false, true,false,false,false,// ‹óAŒãè‚Ì•àŒj‹â‹àŠp”ò
-      true,false,false,false,false,false,false, true // Œãè‚Ì‰¤A‚ÆˆÇŒ\‘S@”n—³
+     false,false,false,false,false,false,false,false,// å…ˆæ‰‹ã§ã‚‚å¾Œæ‰‹ã§ã‚‚ãªã„é§’
+     false,false,false,false,false,false,false,false,// å…ˆæ‰‹ã§ã‚‚å¾Œæ‰‹ã§ã‚‚ãªã„é§’
+     false,false,false,false, true, true,false,false,// ç©ºã€å…ˆæ‰‹ã®æ­©é¦™æ¡‚éŠ€é‡‘è§’é£›
+      true, true, true, true, true,false,false, true,// å…ˆæ‰‹ã®ç‹ã€ã¨æåœ­å…¨ã€€é¦¬ç«œ
+     false,false,false,false, true,false,false,false,// ç©ºã€å¾Œæ‰‹ã®æ­©é¦™æ¡‚éŠ€é‡‘è§’é£›
+      true,false,false,false,false,false,false, true // å¾Œæ‰‹ã®ç‹ã€ã¨æåœ­å…¨ã€€é¦¬ç«œ
     },
-    // •ûŒü 6 ^ã‚Ö‚Ì“®‚«
+    // æ–¹å‘ 6 çœŸä¸Šã¸ã®å‹•ã
     {
-     false,false,false,false,false,false,false,false,// æè‚Å‚àŒãè‚Å‚à‚È‚¢‹î
-     false,false,false,false,false,false,false,false,// æè‚Å‚àŒãè‚Å‚à‚È‚¢‹î
-     false, true,false,false, true, true,false,false,// ‹óAæè‚Ì•àŒj‹â‹àŠp”ò
-      true, true, true, true, true,false, true,false,// æè‚Ì‰¤A‚ÆˆÇŒ\‘S@”n—³
-     false,false,false,false,false, true,false,false,// ‹óAŒãè‚Ì•àŒj‹â‹àŠp”ò
-      true, true, true, true, true,false, true,false // Œãè‚Ì‰¤A‚ÆˆÇŒ\‘S@”n—³
+     false,false,false,false,false,false,false,false,// å…ˆæ‰‹ã§ã‚‚å¾Œæ‰‹ã§ã‚‚ãªã„é§’
+     false,false,false,false,false,false,false,false,// å…ˆæ‰‹ã§ã‚‚å¾Œæ‰‹ã§ã‚‚ãªã„é§’
+     false, true,false,false, true, true,false,false,// ç©ºã€å…ˆæ‰‹ã®æ­©é¦™æ¡‚éŠ€é‡‘è§’é£›
+      true, true, true, true, true,false, true,false,// å…ˆæ‰‹ã®ç‹ã€ã¨æåœ­å…¨ã€€é¦¬ç«œ
+     false,false,false,false,false, true,false,false,// ç©ºã€å¾Œæ‰‹ã®æ­©é¦™æ¡‚éŠ€é‡‘è§’é£›
+      true, true, true, true, true,false, true,false // å¾Œæ‰‹ã®ç‹ã€ã¨æåœ­å…¨ã€€é¦¬ç«œ
      },
-     // •ûŒü 7 Î‚ß‰Eã‚Ö‚Ì“®‚«
+     // æ–¹å‘ 7 æ–œã‚å³ä¸Šã¸ã®å‹•ã
      {
-      false,false,false,false,false,false,false,false,// æè‚Å‚àŒãè‚Å‚à‚È‚¢‹î
-      false,false,false,false,false,false,false,false,// æè‚Å‚àŒãè‚Å‚à‚È‚¢‹î
-      false,false,false,false, true, true,false,false,// ‹óAæè‚Ì•àŒj‹â‹àŠp”ò
-       true, true, true, true, true,false,false, true,// æè‚Ì‰¤A‚ÆˆÇŒ\‘S@”n—³
-      false,false,false,false, true,false,false,false,// ‹óAŒãè‚Ì•àŒj‹â‹àŠp”ò
-       true,false,false,false,false,false,false, true // Œãè‚Ì‰¤A‚ÆˆÇŒ\‘S@”n—³
+      false,false,false,false,false,false,false,false,// å…ˆæ‰‹ã§ã‚‚å¾Œæ‰‹ã§ã‚‚ãªã„é§’
+      false,false,false,false,false,false,false,false,// å…ˆæ‰‹ã§ã‚‚å¾Œæ‰‹ã§ã‚‚ãªã„é§’
+      false,false,false,false, true, true,false,false,// ç©ºã€å…ˆæ‰‹ã®æ­©é¦™æ¡‚éŠ€é‡‘è§’é£›
+       true, true, true, true, true,false,false, true,// å…ˆæ‰‹ã®ç‹ã€ã¨æåœ­å…¨ã€€é¦¬ç«œ
+      false,false,false,false, true,false,false,false,// ç©ºã€å¾Œæ‰‹ã®æ­©é¦™æ¡‚éŠ€é‡‘è§’é£›
+       true,false,false,false,false,false,false, true // å¾Œæ‰‹ã®ç‹ã€ã¨æåœ­å…¨ã€€é¦¬ç«œ
      },
-     // •ûŒü 8 æè‚ÌŒj”n”ò‚Ñ
+     // æ–¹å‘ 8 å…ˆæ‰‹ã®æ¡‚é¦¬é£›ã³
      {
-      false,false,false,false,false,false,false,false,// æè‚Å‚àŒãè‚Å‚à‚È‚¢‹î
-      false,false,false,false,false,false,false,false,// æè‚Å‚àŒãè‚Å‚à‚È‚¢‹î
-      false,false,false, true,false,false,false,false,// ‹óAæè‚Ì•àŒj‹â‹àŠp”ò
-      false,false,false,false,false,false,false,false,// æè‚Ì‰¤A‚ÆˆÇŒ\‘S@”n—³
-      false,false,false,false,false,false,false,false,// ‹óAŒãè‚Ì•àŒj‹â‹àŠp”ò
-      false,false,false,false,false,false,false,false // Œãè‚Ì‰¤A‚ÆˆÇŒ\‘S@”n—³
+      false,false,false,false,false,false,false,false,// å…ˆæ‰‹ã§ã‚‚å¾Œæ‰‹ã§ã‚‚ãªã„é§’
+      false,false,false,false,false,false,false,false,// å…ˆæ‰‹ã§ã‚‚å¾Œæ‰‹ã§ã‚‚ãªã„é§’
+      false,false,false, true,false,false,false,false,// ç©ºã€å…ˆæ‰‹ã®æ­©é¦™æ¡‚éŠ€é‡‘è§’é£›
+      false,false,false,false,false,false,false,false,// å…ˆæ‰‹ã®ç‹ã€ã¨æåœ­å…¨ã€€é¦¬ç«œ
+      false,false,false,false,false,false,false,false,// ç©ºã€å¾Œæ‰‹ã®æ­©é¦™æ¡‚éŠ€é‡‘è§’é£›
+      false,false,false,false,false,false,false,false // å¾Œæ‰‹ã®ç‹ã€ã¨æåœ­å…¨ã€€é¦¬ç«œ
      },
-     // •ûŒü 9 æè‚ÌŒj”n”ò‚Ñ
+     // æ–¹å‘ 9 å…ˆæ‰‹ã®æ¡‚é¦¬é£›ã³
      {
-      false,false,false,false,false,false,false,false,// æè‚Å‚àŒãè‚Å‚à‚È‚¢‹î
-      false,false,false,false,false,false,false,false,// æè‚Å‚àŒãè‚Å‚à‚È‚¢‹î
-      false,false,false, true,false,false,false,false,// ‹óAæè‚Ì•àŒj‹â‹àŠp”ò
-      false,false,false,false,false,false,false,false,// æè‚Ì‰¤A‚ÆˆÇŒ\‘S@”n—³
-      false,false,false,false,false,false,false,false,// ‹óAŒãè‚Ì•àŒj‹â‹àŠp”ò
-      false,false,false,false,false,false,false,false // Œãè‚Ì‰¤A‚ÆˆÇŒ\‘S@”n—³
+      false,false,false,false,false,false,false,false,// å…ˆæ‰‹ã§ã‚‚å¾Œæ‰‹ã§ã‚‚ãªã„é§’
+      false,false,false,false,false,false,false,false,// å…ˆæ‰‹ã§ã‚‚å¾Œæ‰‹ã§ã‚‚ãªã„é§’
+      false,false,false, true,false,false,false,false,// ç©ºã€å…ˆæ‰‹ã®æ­©é¦™æ¡‚éŠ€é‡‘è§’é£›
+      false,false,false,false,false,false,false,false,// å…ˆæ‰‹ã®ç‹ã€ã¨æåœ­å…¨ã€€é¦¬ç«œ
+      false,false,false,false,false,false,false,false,// ç©ºã€å¾Œæ‰‹ã®æ­©é¦™æ¡‚éŠ€é‡‘è§’é£›
+      false,false,false,false,false,false,false,false // å¾Œæ‰‹ã®ç‹ã€ã¨æåœ­å…¨ã€€é¦¬ç«œ
      },
-     // •ûŒü10 Œãè‚ÌŒj”n”ò‚Ñ
+     // æ–¹å‘10 å¾Œæ‰‹ã®æ¡‚é¦¬é£›ã³
      {
-      false,false,false,false,false,false,false,false,// æè‚Å‚àŒãè‚Å‚à‚È‚¢‹î
-      false,false,false,false,false,false,false,false,// æè‚Å‚àŒãè‚Å‚à‚È‚¢‹î
-      false,false,false,false,false,false,false,false,// ‹óAæè‚Ì•àŒj‹â‹àŠp”ò
-      false,false,false,false,false,false,false,false,// æè‚Ì‰¤A‚ÆˆÇŒ\‘S@”n—³
-      false,false,false, true,false,false,false,false,// ‹óAŒãè‚Ì•àŒj‹â‹àŠp”ò
-      false,false,false,false,false,false,false,false // Œãè‚Ì‰¤A‚ÆˆÇŒ\‘S@”n—³
+      false,false,false,false,false,false,false,false,// å…ˆæ‰‹ã§ã‚‚å¾Œæ‰‹ã§ã‚‚ãªã„é§’
+      false,false,false,false,false,false,false,false,// å…ˆæ‰‹ã§ã‚‚å¾Œæ‰‹ã§ã‚‚ãªã„é§’
+      false,false,false,false,false,false,false,false,// ç©ºã€å…ˆæ‰‹ã®æ­©é¦™æ¡‚éŠ€é‡‘è§’é£›
+      false,false,false,false,false,false,false,false,// å…ˆæ‰‹ã®ç‹ã€ã¨æåœ­å…¨ã€€é¦¬ç«œ
+      false,false,false, true,false,false,false,false,// ç©ºã€å¾Œæ‰‹ã®æ­©é¦™æ¡‚éŠ€é‡‘è§’é£›
+      false,false,false,false,false,false,false,false // å¾Œæ‰‹ã®ç‹ã€ã¨æåœ­å…¨ã€€é¦¬ç«œ
      },
-     // •ûŒü11 Œãè‚ÌŒj”n”ò‚Ñ
+     // æ–¹å‘11 å¾Œæ‰‹ã®æ¡‚é¦¬é£›ã³
      {
-      false,false,false,false,false,false,false,false,// æè‚Å‚àŒãè‚Å‚à‚È‚¢‹î
-      false,false,false,false,false,false,false,false,// æè‚Å‚àŒãè‚Å‚à‚È‚¢‹î
-      false,false,false,false,false,false,false,false,// ‹óAæè‚Ì•àŒj‹â‹àŠp”ò
-      false,false,false,false,false,false,false,false,// æè‚Ì‰¤A‚ÆˆÇŒ\‘S@”n—³
-      false,false,false, true,false,false,false,false,// ‹óAŒãè‚Ì•àŒj‹â‹àŠp”ò
-      false,false,false,false,false,false,false,false // Œãè‚Ì‰¤A‚ÆˆÇŒ\‘S@”n—³
+      false,false,false,false,false,false,false,false,// å…ˆæ‰‹ã§ã‚‚å¾Œæ‰‹ã§ã‚‚ãªã„é§’
+      false,false,false,false,false,false,false,false,// å…ˆæ‰‹ã§ã‚‚å¾Œæ‰‹ã§ã‚‚ãªã„é§’
+      false,false,false,false,false,false,false,false,// ç©ºã€å…ˆæ‰‹ã®æ­©é¦™æ¡‚éŠ€é‡‘è§’é£›
+      false,false,false,false,false,false,false,false,// å…ˆæ‰‹ã®ç‹ã€ã¨æåœ­å…¨ã€€é¦¬ç«œ
+      false,false,false, true,false,false,false,false,// ç©ºã€å¾Œæ‰‹ã®æ­©é¦™æ¡‚éŠ€é‡‘è§’é£›
+      false,false,false,false,false,false,false,false // å¾Œæ‰‹ã®ç‹ã€ã¨æåœ­å…¨ã€€é¦¬ç«œ
      }
   };
 
-  // ‚ ‚é•ûŒü‚É‚ ‚é‹î‚ª”ò‚×‚é‚©‚Ç‚¤‚©‚ğ•\‚·ƒe[ƒuƒ‹B
-  // “Y‚¦š‚Ì‚P‚Â‚ß‚ª•ûŒü‚ÅA‚Q‚Â‚ß‚ª‹î‚Ìí—Ş‚Å‚ ‚éB
-  // Ô‚â”òÔAŠpA—³A”n‚Ìˆê’¼ü‚É“®‚­“®‚«‚É‚Â‚¢‚Ä‚ÍA‚±‚¿‚ç‚Å•\‚·B
+  // ã‚ã‚‹æ–¹å‘ã«ã‚ã‚‹é§’ãŒé£›ã¹ã‚‹ã‹ã©ã†ã‹ã‚’è¡¨ã™ãƒ†ãƒ¼ãƒ–ãƒ«ã€‚
+  // æ·»ãˆå­—ã®ï¼‘ã¤ã‚ãŒæ–¹å‘ã§ã€ï¼’ã¤ã‚ãŒé§’ã®ç¨®é¡ã§ã‚ã‚‹ã€‚
+  // é¦™è»Šã‚„é£›è»Šã€è§’ã€ç«œã€é¦¬ã®ä¸€ç›´ç·šã«å‹•ãå‹•ãã«ã¤ã„ã¦ã¯ã€ã“ã¡ã‚‰ã§è¡¨ã™ã€‚
   static final public boolean canJump[][]={
-    // •ûŒü 0 Î‚ß¶‰º‚Ö‚Ì“®‚«
+    // æ–¹å‘ 0 æ–œã‚å·¦ä¸‹ã¸ã®å‹•ã
     {
-     false,false,false,false,false,false,false,false,// æè‚Å‚àŒãè‚Å‚à‚È‚¢‹î
-     false,false,false,false,false,false,false,false,// æè‚Å‚àŒãè‚Å‚à‚È‚¢‹î
-     false,false,false,false,false,false, true,false,// ‹óAæè‚Ì•àŒj‹â‹àŠp”ò
-     false,false,false,false,false,false, true,false,// æè‚Ì‰¤A‚ÆˆÇŒ\‘S@”n—³
-     false,false,false,false,false,false, true,false,// ‹óAŒãè‚Ì•àŒj‹â‹àŠp”ò
-     false,false,false,false,false,false, true,false // Œãè‚Ì‰¤A‚ÆˆÇŒ\‘S@”n—³
+     false,false,false,false,false,false,false,false,// å…ˆæ‰‹ã§ã‚‚å¾Œæ‰‹ã§ã‚‚ãªã„é§’
+     false,false,false,false,false,false,false,false,// å…ˆæ‰‹ã§ã‚‚å¾Œæ‰‹ã§ã‚‚ãªã„é§’
+     false,false,false,false,false,false, true,false,// ç©ºã€å…ˆæ‰‹ã®æ­©é¦™æ¡‚éŠ€é‡‘è§’é£›
+     false,false,false,false,false,false, true,false,// å…ˆæ‰‹ã®ç‹ã€ã¨æåœ­å…¨ã€€é¦¬ç«œ
+     false,false,false,false,false,false, true,false,// ç©ºã€å¾Œæ‰‹ã®æ­©é¦™æ¡‚éŠ€é‡‘è§’é£›
+     false,false,false,false,false,false, true,false // å¾Œæ‰‹ã®ç‹ã€ã¨æåœ­å…¨ã€€é¦¬ç«œ
     },
-    // •ûŒü 1 ^‰º‚Ö‚Ì“®‚«
+    // æ–¹å‘ 1 çœŸä¸‹ã¸ã®å‹•ã
     {
-     false,false,false,false,false,false,false,false,// æè‚Å‚àŒãè‚Å‚à‚È‚¢‹î
-     false,false,false,false,false,false,false,false,// æè‚Å‚àŒãè‚Å‚à‚È‚¢‹î
-     false,false,false,false,false,false,false, true,// ‹óAæè‚Ì•àŒj‹â‹àŠp”ò
-     false,false,false,false,false,false,false, true,// æè‚Ì‰¤A‚ÆˆÇŒ\‘S@”n—³
-     false,false, true,false,false,false,false, true,// ‹óAŒãè‚Ì•àŒj‹â‹àŠp”ò
-     false,false,false,false,false,false,false, true // Œãè‚Ì‰¤A‚ÆˆÇŒ\‘S@”n—³
+     false,false,false,false,false,false,false,false,// å…ˆæ‰‹ã§ã‚‚å¾Œæ‰‹ã§ã‚‚ãªã„é§’
+     false,false,false,false,false,false,false,false,// å…ˆæ‰‹ã§ã‚‚å¾Œæ‰‹ã§ã‚‚ãªã„é§’
+     false,false,false,false,false,false,false, true,// ç©ºã€å…ˆæ‰‹ã®æ­©é¦™æ¡‚éŠ€é‡‘è§’é£›
+     false,false,false,false,false,false,false, true,// å…ˆæ‰‹ã®ç‹ã€ã¨æåœ­å…¨ã€€é¦¬ç«œ
+     false,false, true,false,false,false,false, true,// ç©ºã€å¾Œæ‰‹ã®æ­©é¦™æ¡‚éŠ€é‡‘è§’é£›
+     false,false,false,false,false,false,false, true // å¾Œæ‰‹ã®ç‹ã€ã¨æåœ­å…¨ã€€é¦¬ç«œ
     },
-    // •ûŒü 2 Î‚ß‰E‰º‚Ö‚Ì“®‚«
+    // æ–¹å‘ 2 æ–œã‚å³ä¸‹ã¸ã®å‹•ã
     {
-     false,false,false,false,false,false,false,false,// æè‚Å‚àŒãè‚Å‚à‚È‚¢‹î
-     false,false,false,false,false,false,false,false,// æè‚Å‚àŒãè‚Å‚à‚È‚¢‹î
-     false,false,false,false,false,false, true,false,// ‹óAæè‚Ì•àŒj‹â‹àŠp”ò
-     false,false,false,false,false,false, true,false,// æè‚Ì‰¤A‚ÆˆÇŒ\‘S@”n—³
-     false,false,false,false,false,false, true,false,// ‹óAŒãè‚Ì•àŒj‹â‹àŠp”ò
-     false,false,false,false,false,false, true,false // Œãè‚Ì‰¤A‚ÆˆÇŒ\‘S@”n—³
+     false,false,false,false,false,false,false,false,// å…ˆæ‰‹ã§ã‚‚å¾Œæ‰‹ã§ã‚‚ãªã„é§’
+     false,false,false,false,false,false,false,false,// å…ˆæ‰‹ã§ã‚‚å¾Œæ‰‹ã§ã‚‚ãªã„é§’
+     false,false,false,false,false,false, true,false,// ç©ºã€å…ˆæ‰‹ã®æ­©é¦™æ¡‚éŠ€é‡‘è§’é£›
+     false,false,false,false,false,false, true,false,// å…ˆæ‰‹ã®ç‹ã€ã¨æåœ­å…¨ã€€é¦¬ç«œ
+     false,false,false,false,false,false, true,false,// ç©ºã€å¾Œæ‰‹ã®æ­©é¦™æ¡‚éŠ€é‡‘è§’é£›
+     false,false,false,false,false,false, true,false // å¾Œæ‰‹ã®ç‹ã€ã¨æåœ­å…¨ã€€é¦¬ç«œ
     },
-    // •ûŒü 3 ¶‚Ö‚Ì“®‚«
+    // æ–¹å‘ 3 å·¦ã¸ã®å‹•ã
     {
-     false,false,false,false,false,false,false,false,// æè‚Å‚àŒãè‚Å‚à‚È‚¢‹î
-     false,false,false,false,false,false,false,false,// æè‚Å‚àŒãè‚Å‚à‚È‚¢‹î
-     false,false,false,false,false,false,false, true,// ‹óAæè‚Ì•àŒj‹â‹àŠp”ò
-     false,false,false,false,false,false,false, true,// æè‚Ì‰¤A‚ÆˆÇŒ\‘S@”n—³
-     false,false,false,false,false,false,false, true,// ‹óAŒãè‚Ì•àŒj‹â‹àŠp”ò
-     false,false,false,false,false,false,false, true // Œãè‚Ì‰¤A‚ÆˆÇŒ\‘S@”n—³
+     false,false,false,false,false,false,false,false,// å…ˆæ‰‹ã§ã‚‚å¾Œæ‰‹ã§ã‚‚ãªã„é§’
+     false,false,false,false,false,false,false,false,// å…ˆæ‰‹ã§ã‚‚å¾Œæ‰‹ã§ã‚‚ãªã„é§’
+     false,false,false,false,false,false,false, true,// ç©ºã€å…ˆæ‰‹ã®æ­©é¦™æ¡‚éŠ€é‡‘è§’é£›
+     false,false,false,false,false,false,false, true,// å…ˆæ‰‹ã®ç‹ã€ã¨æåœ­å…¨ã€€é¦¬ç«œ
+     false,false,false,false,false,false,false, true,// ç©ºã€å¾Œæ‰‹ã®æ­©é¦™æ¡‚éŠ€é‡‘è§’é£›
+     false,false,false,false,false,false,false, true // å¾Œæ‰‹ã®ç‹ã€ã¨æåœ­å…¨ã€€é¦¬ç«œ
     },
-    // •ûŒü 4 ‰E‚Ö‚Ì“®‚«
+    // æ–¹å‘ 4 å³ã¸ã®å‹•ã
     {
-     false,false,false,false,false,false,false,false,// æè‚Å‚àŒãè‚Å‚à‚È‚¢‹î
-     false,false,false,false,false,false,false,false,// æè‚Å‚àŒãè‚Å‚à‚È‚¢‹î
-     false,false,false,false,false,false,false, true,// ‹óAæè‚Ì•àŒj‹â‹àŠp”ò
-     false,false,false,false,false,false,false, true,// æè‚Ì‰¤A‚ÆˆÇŒ\‘S@”n—³
-     false,false,false,false,false,false,false, true,// ‹óAŒãè‚Ì•àŒj‹â‹àŠp”ò
-     false,false,false,false,false,false,false, true // Œãè‚Ì‰¤A‚ÆˆÇŒ\‘S@”n—³
+     false,false,false,false,false,false,false,false,// å…ˆæ‰‹ã§ã‚‚å¾Œæ‰‹ã§ã‚‚ãªã„é§’
+     false,false,false,false,false,false,false,false,// å…ˆæ‰‹ã§ã‚‚å¾Œæ‰‹ã§ã‚‚ãªã„é§’
+     false,false,false,false,false,false,false, true,// ç©ºã€å…ˆæ‰‹ã®æ­©é¦™æ¡‚éŠ€é‡‘è§’é£›
+     false,false,false,false,false,false,false, true,// å…ˆæ‰‹ã®ç‹ã€ã¨æåœ­å…¨ã€€é¦¬ç«œ
+     false,false,false,false,false,false,false, true,// ç©ºã€å¾Œæ‰‹ã®æ­©é¦™æ¡‚éŠ€é‡‘è§’é£›
+     false,false,false,false,false,false,false, true // å¾Œæ‰‹ã®ç‹ã€ã¨æåœ­å…¨ã€€é¦¬ç«œ
     },
-    // •ûŒü 5 Î‚ß¶ã‚Ö‚Ì“®‚«
+    // æ–¹å‘ 5 æ–œã‚å·¦ä¸Šã¸ã®å‹•ã
     {
-     false,false,false,false,false,false,false,false,// æè‚Å‚àŒãè‚Å‚à‚È‚¢‹î
-     false,false,false,false,false,false,false,false,// æè‚Å‚àŒãè‚Å‚à‚È‚¢‹î
-     false,false,false,false,false,false, true,false,// ‹óAæè‚Ì•àŒj‹â‹àŠp”ò
-     false,false,false,false,false,false, true,false,// æè‚Ì‰¤A‚ÆˆÇŒ\‘S@”n—³
-     false,false,false,false,false,false, true,false,// ‹óAŒãè‚Ì•àŒj‹â‹àŠp”ò
-     false,false,false,false,false,false, true,false // Œãè‚Ì‰¤A‚ÆˆÇŒ\‘S@”n—³
+     false,false,false,false,false,false,false,false,// å…ˆæ‰‹ã§ã‚‚å¾Œæ‰‹ã§ã‚‚ãªã„é§’
+     false,false,false,false,false,false,false,false,// å…ˆæ‰‹ã§ã‚‚å¾Œæ‰‹ã§ã‚‚ãªã„é§’
+     false,false,false,false,false,false, true,false,// ç©ºã€å…ˆæ‰‹ã®æ­©é¦™æ¡‚éŠ€é‡‘è§’é£›
+     false,false,false,false,false,false, true,false,// å…ˆæ‰‹ã®ç‹ã€ã¨æåœ­å…¨ã€€é¦¬ç«œ
+     false,false,false,false,false,false, true,false,// ç©ºã€å¾Œæ‰‹ã®æ­©é¦™æ¡‚éŠ€é‡‘è§’é£›
+     false,false,false,false,false,false, true,false // å¾Œæ‰‹ã®ç‹ã€ã¨æåœ­å…¨ã€€é¦¬ç«œ
     },
-    // •ûŒü 6 ^ã‚Ö‚Ì“®‚«
+    // æ–¹å‘ 6 çœŸä¸Šã¸ã®å‹•ã
     {
-     false,false,false,false,false,false,false,false,// æè‚Å‚àŒãè‚Å‚à‚È‚¢‹î
-     false,false,false,false,false,false,false,false,// æè‚Å‚àŒãè‚Å‚à‚È‚¢‹î
-     false,false, true,false,false,false,false, true,// ‹óAæè‚Ì•àŒj‹â‹àŠp”ò
-     false,false,false,false,false,false,false, true,// æè‚Ì‰¤A‚ÆˆÇŒ\‘S@”n—³
-     false,false,false,false,false,false,false, true,// ‹óAŒãè‚Ì•àŒj‹â‹àŠp”ò
-     false,false,false,false,false,false,false, true // Œãè‚Ì‰¤A‚ÆˆÇŒ\‘S@”n—³
+     false,false,false,false,false,false,false,false,// å…ˆæ‰‹ã§ã‚‚å¾Œæ‰‹ã§ã‚‚ãªã„é§’
+     false,false,false,false,false,false,false,false,// å…ˆæ‰‹ã§ã‚‚å¾Œæ‰‹ã§ã‚‚ãªã„é§’
+     false,false, true,false,false,false,false, true,// ç©ºã€å…ˆæ‰‹ã®æ­©é¦™æ¡‚éŠ€é‡‘è§’é£›
+     false,false,false,false,false,false,false, true,// å…ˆæ‰‹ã®ç‹ã€ã¨æåœ­å…¨ã€€é¦¬ç«œ
+     false,false,false,false,false,false,false, true,// ç©ºã€å¾Œæ‰‹ã®æ­©é¦™æ¡‚éŠ€é‡‘è§’é£›
+     false,false,false,false,false,false,false, true // å¾Œæ‰‹ã®ç‹ã€ã¨æåœ­å…¨ã€€é¦¬ç«œ
     },
-    // •ûŒü 7 Î‚ß‰Eã‚Ö‚Ì“®‚«
+    // æ–¹å‘ 7 æ–œã‚å³ä¸Šã¸ã®å‹•ã
     {
-     false,false,false,false,false,false,false,false,// æè‚Å‚àŒãè‚Å‚à‚È‚¢‹î
-     false,false,false,false,false,false,false,false,// æè‚Å‚àŒãè‚Å‚à‚È‚¢‹î
-     false,false,false,false,false,false, true,false,// ‹óAæè‚Ì•àŒj‹â‹àŠp”ò
-     false,false,false,false,false,false, true,false,// æè‚Ì‰¤A‚ÆˆÇŒ\‘S@”n—³
-     false,false,false,false,false,false, true,false,// ‹óAŒãè‚Ì•àŒj‹â‹àŠp”ò
-     false,false,false,false,false,false, true,false // Œãè‚Ì‰¤A‚ÆˆÇŒ\‘S@”n—³
+     false,false,false,false,false,false,false,false,// å…ˆæ‰‹ã§ã‚‚å¾Œæ‰‹ã§ã‚‚ãªã„é§’
+     false,false,false,false,false,false,false,false,// å…ˆæ‰‹ã§ã‚‚å¾Œæ‰‹ã§ã‚‚ãªã„é§’
+     false,false,false,false,false,false, true,false,// ç©ºã€å…ˆæ‰‹ã®æ­©é¦™æ¡‚éŠ€é‡‘è§’é£›
+     false,false,false,false,false,false, true,false,// å…ˆæ‰‹ã®ç‹ã€ã¨æåœ­å…¨ã€€é¦¬ç«œ
+     false,false,false,false,false,false, true,false,// ç©ºã€å¾Œæ‰‹ã®æ­©é¦™æ¡‚éŠ€é‡‘è§’é£›
+     false,false,false,false,false,false, true,false // å¾Œæ‰‹ã®ç‹ã€ã¨æåœ­å…¨ã€€é¦¬ç«œ
     }
-    // Œj”n‚Ì•ûŒü‚É”ò‚Ô‹î‚Í‚È‚¢‚Ì‚ÅAˆÈ‰º‚ÍÈ—ªB
+    // æ¡‚é¦¬ã®æ–¹å‘ã«é£›ã¶é§’ã¯ãªã„ã®ã§ã€ä»¥ä¸‹ã¯çœç•¥ã€‚
   };
 }
+

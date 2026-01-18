@@ -1,25 +1,25 @@
 package jp.usapyonsoft.lesserpyon;
 
-// ‹î‚ÌˆÊ’u‚ğ•\‚·ƒNƒ‰ƒX
+// é§’ã®ä½ç½®ã‚’è¡¨ã™ã‚¯ãƒ©ã‚¹
 class Position implements Cloneable,KomaMoves {
-  // ‹Ø
+  // ç­‹
   public int suji;
-  // ’i
+  // æ®µ
   public int dan;
   
-  // ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+  // ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
   public Position() {
     suji=0;
     dan=0;
   }
   
-  // ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+  // ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
   public Position(int _suji,int _dan) {
     suji=_suji;
     dan=_dan;
   }
   
-  // “¯ˆê«”äŠr—pƒƒ\ƒbƒh
+  // åŒä¸€æ€§æ¯”è¼ƒç”¨ãƒ¡ã‚½ãƒƒãƒ‰
   public boolean equals(Position p) {
     return (p.suji==suji && p.dan==dan);
   }
@@ -29,30 +29,31 @@ class Position implements Cloneable,KomaMoves {
     return equals(p);
   }
   
-  // ƒRƒs[‚ğ•Ô‚·
+  // ã‚³ãƒ”ãƒ¼ã‚’è¿”ã™
   public Object clone() {
     return new Position(suji,dan);
   }
   
-  // ‚ ‚é•ûŒü‚Ö‚Ì“®‚«‚ğs‚¤
+  // ã‚ã‚‹æ–¹å‘ã¸ã®å‹•ãã‚’è¡Œã†
   public void add(int diffSuji,int diffDan) {
     suji+=diffSuji;
     dan+=diffDan;
   }
   
-  // ‚ ‚é•ûŒü‚Ö‚Ì‹tŒü‚«‚Ì“®‚«‚ğs‚¤
+  // ã‚ã‚‹æ–¹å‘ã¸ã®é€†å‘ãã®å‹•ãã‚’è¡Œã†
   public void sub(int diffSuji,int diffDan) {
     suji-=diffSuji;
     dan-=diffDan;
   }
   
-  // ‚ ‚é•ûŒü‚Ö‚Ì“®‚«‚ğs‚¤
+  // ã‚ã‚‹æ–¹å‘ã¸ã®å‹•ãã‚’è¡Œã†
   public void add(int direct) {
     add(diffSuji[direct],diffDan[direct]);
   }
   
-  // ‚ ‚é•ûŒü‚Ö‚Ì‹tŒü‚«‚Ì“®‚«‚ğs‚¤
+  // ã‚ã‚‹æ–¹å‘ã¸ã®é€†å‘ãã®å‹•ãã‚’è¡Œã†
   public void sub(int direct) {
     sub(diffSuji[direct],diffDan[direct]);
   }
 }
+

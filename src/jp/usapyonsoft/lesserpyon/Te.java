@@ -1,10 +1,10 @@
 package jp.usapyonsoft.lesserpyon;
 
 public class Te implements Cloneable,Constants {
-  int koma;                 // ‚Ç‚Ì‹î‚ª“®‚¢‚½‚©
-  Position from;            // “®‚­‘O‚ÌˆÊ’ui‚¿‹î‚Ìê‡A‚O‹Ø‚O’ij
-  Position to;              // “®‚¢‚½æ‚ÌˆÊ’u
-  boolean promote;          // ¬‚éê‡Atrue ¬‚ç‚È‚¢ê‡ false
+  int koma;                 // ã©ã®é§’ãŒå‹•ã„ãŸã‹
+  Position from;            // å‹•ãå‰ã®ä½ç½®ï¼ˆæŒã¡é§’ã®å ´åˆã€ï¼ç­‹ï¼æ®µï¼‰
+  Position to;              // å‹•ã„ãŸå…ˆã®ä½ç½®
+  boolean promote;          // æˆã‚‹å ´åˆã€true æˆã‚‰ãªã„å ´åˆ false
   
   public Te(int _koma,Position _from,Position _to,boolean _promote) {
     koma=_koma;
@@ -27,11 +27,12 @@ public class Te implements Cloneable,Constants {
     return new Te(koma,from,to,promote);
   }
   
-  // è‚ğ•¶š—ñ‚Å•\Œ»‚·‚éB
+  // æ‰‹ã‚’æ–‡å­—åˆ—ã§è¡¨ç¾ã™ã‚‹ã€‚
   public String toString() {
     return sujiStr[to.suji]+danStr[to.dan]+
-            Koma.toString(koma)+(promote?"¬":"")+
-            (from.suji==0?"‘Å@@":"("+sujiStr[from.suji]+danStr[from.dan]+")")+
-            (promote?"":"@");
+            Koma.toString(koma)+(promote?"æˆ":"")+
+            (from.suji==0?"æ‰“ã€€ã€€":"("+sujiStr[from.suji]+danStr[from.dan]+")")+
+            (promote?"":"ã€€");
   }
 }
+
