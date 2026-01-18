@@ -1,15 +1,16 @@
 package jp.usapyonsoft.lesserpyon;
-import java.util.Vector;
+import java.util.List;
+import java.util.ArrayList;
 
 public class GenerateMoves implements Constants,KomaMoves {
 
   // 各手について、自分の玉に王手がかかっていないかどうかチェックし、
   // 王手がかかっている手は取り除く。
-  public static Vector removeSelfMate(Kyokumen k,Vector v) {
-    Vector removed=new Vector();
+  public static List<Te> removeSelfMate(Kyokumen k,List<Te> v) {
+    List<Te> removed=new ArrayList<Te>();
     for(int i=0;i<v.size();i++) {
       // 手を取り出す。
-      Te te=(Te)v.elementAt(i);
+      Te te=v.get(i);
 
       // その手で１手進めてみる
       Kyokumen test=(Kyokumen)k.clone();
@@ -24,7 +25,7 @@ public class GenerateMoves implements Constants,KomaMoves {
       // 玉の周辺（１２方向）から相手の駒が利いていたら、その手は取り除く
       for(int direct=0;direct<12 && !isOuteHouchi;direct++) {
         // 方向の反対方向にある駒を取得
-        Position pos=(Position)gyokuPosition.clone();
+          Position pos=(Position)gyokuPosition.clone();
         pos.sub(direct);
         int koma=test.get(pos);
         // その駒が敵の駒で、玉方向に動けるか？
@@ -66,7 +67,7 @@ public class GenerateMoves implements Constants,KomaMoves {
   
   // 与えられたVectorに、手番、駒の種類、移動元、移動先を考慮して、
   // 成る・不成りを判断しながら生成した手を追加する。
-  public static void addTe(Vector v,int teban,int koma,Position from,Position to) {
+  public static void addTe(List<Te> v,int teban,int koma,Position from,Position to) {
     if (teban==SENTE) {
       // 先手番
       if ((Koma.getKomashu(koma)==Koma.KY || Koma.getKomashu(koma)==Koma.FU) && to.dan==1) {
@@ -157,7 +158,7 @@ public class GenerateMoves implements Constants,KomaMoves {
     test.move(te);
     test.teban=tebanAite;
     // その局面で、相手に合法手があるか？なければ、打ち歩詰め。
-    Vector v=generateLegalMoves(test);
+    List<Te> v=generateLegalMoves(test);
     if (v.size()==0) {
       // 合法手がないので、打ち歩詰め。
       return true;
@@ -166,8 +167,8 @@ public class GenerateMoves implements Constants,KomaMoves {
   }
   
   // 与えられた局面における合法手を生成する。
-  public static Vector generateLegalMoves(Kyokumen k) {
-    Vector v=new Vector();
+  public static List<Te> generateLegalMoves(Kyokumen k) {
+    List<Te> v=new ArrayList<Te>();
 
     // 盤上の手番の側の駒を動かす手を生成
     for(int suji=1;suji<=9;suji++) {
@@ -223,7 +224,7 @@ public class GenerateMoves implements Constants,KomaMoves {
     boolean isPutted[]={false,false,false,false,false,false,false,false};
 
     // 手番の側の持ち駒
-    Vector motigoma;
+    List<Integer> motigoma;
     if (k.teban==SENTE) {
       motigoma=k.hand[0];
     } else {
@@ -233,7 +234,7 @@ public class GenerateMoves implements Constants,KomaMoves {
     // まず、手番の側の持ち駒でループ
     for(int i=0;i<motigoma.size();i++) {
       // 持ち駒を一つ取り出す
-      int koma=((Integer)motigoma.elementAt(i)).intValue();
+      int koma=motigoma.get(i);
       // 駒の種類を得る
       int komashu=Koma.getKomashu(koma);
       if (isPutted[komashu]) {

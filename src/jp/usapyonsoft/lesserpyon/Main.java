@@ -1,5 +1,6 @@
 package jp.usapyonsoft.lesserpyon;
-import java.util.Vector;
+import java.util.List;
+import java.util.ArrayList;
 import java.io.*;
 
 public class Main implements Constants {
@@ -34,22 +35,21 @@ public class Main implements Constants {
         String csaFileName=argv[0];
         File f=new File(csaFileName);
         BufferedReader in=new BufferedReader(new FileReader(f));
-        Vector v=new Vector();
+        List<String> v=new ArrayList<String>();
         String s;
         while((s=in.readLine())!=null) {
           System.out.println("Read:"+s);
           v.add(s);
         }
-        String csaKifu[]=new String[v.size()];
-        v.copyInto(csaKifu);
+        String csaKifu[]=v.toArray(new String[0]);
         k.ReadCsaKifu(csaKifu);
       }
       System.out.println(k.toString());
 
-      Vector v=GenerateMoves.generateLegalMoves(k);
+      List<Te> v=GenerateMoves.generateLegalMoves(k);
       System.out.println("可能手："+v.size()+"手");
       for(int i=0;i<v.size();i++) {
-        Te te=(Te)v.elementAt(i);
+        Te te=v.get(i);
         System.out.println(te.toString());
       }
     } catch(Exception ex) {
