@@ -1,57 +1,58 @@
 package jp.usapyonsoft.lesserpyon;
-import java.util.Vector;
+import java.util.List;
+import java.util.ArrayList;
 
 public class GenerateMoves implements Constants,KomaMoves {
 
-  // Šeè‚É‚Â‚¢‚ÄA©•ª‚Ì‹Ê‚É‰¤è‚ª‚©‚©‚Á‚Ä‚¢‚È‚¢‚©‚Ç‚¤‚©ƒ`ƒFƒbƒN‚µA
-  // ‰¤è‚ª‚©‚©‚Á‚Ä‚¢‚éè‚Íæ‚èœ‚­B
-  public static Vector removeSelfMate(Kyokumen k,Vector v) {
-    Vector removed=new Vector();
+  // å„æ‰‹ã«ã¤ã„ã¦ã€è‡ªåˆ†ã®ç‰ã«ç‹æ‰‹ãŒã‹ã‹ã£ã¦ã„ãªã„ã‹ã©ã†ã‹ãƒã‚§ãƒƒã‚¯ã—ã€
+  // ç‹æ‰‹ãŒã‹ã‹ã£ã¦ã„ã‚‹æ‰‹ã¯å–ã‚Šé™¤ãã€‚
+  public static List<Te> removeSelfMate(Kyokumen k,List<Te> v) {
+    List<Te> removed=new ArrayList<Te>();
     for(int i=0;i<v.size();i++) {
-      // è‚ğæ‚èo‚·B
-      Te te=(Te)v.elementAt(i);
+      // æ‰‹ã‚’å–ã‚Šå‡ºã™ã€‚
+      Te te=v.get(i);
 
-      // ‚»‚Ìè‚Å‚Pèi‚ß‚Ä‚İ‚é
+      // ãã®æ‰‹ã§ï¼‘æ‰‹é€²ã‚ã¦ã¿ã‚‹
       Kyokumen test=(Kyokumen)k.clone();
       test.move(te);
 
-      // ©‹Ê‚ğ’T‚·
+      // è‡ªç‰ã‚’æ¢ã™
       Position gyokuPosition=test.searchGyoku(k.teban);
 
-      // ‰¤è•ú’u‚µ‚Ä‚¢‚é‚©‚Ç‚¤‚©ƒtƒ‰ƒO
+      // ç‹æ‰‹æ”¾ç½®ã—ã¦ã„ã‚‹ã‹ã©ã†ã‹ãƒ•ãƒ©ã‚°
       boolean isOuteHouchi=false;
 
-      // ‹Ê‚Ìü•Ói‚P‚Q•ûŒüj‚©‚ç‘Šè‚Ì‹î‚ª—˜‚¢‚Ä‚¢‚½‚çA‚»‚Ìè‚Íæ‚èœ‚­
+      // ç‰ã®å‘¨è¾ºï¼ˆï¼‘ï¼’æ–¹å‘ï¼‰ã‹ã‚‰ç›¸æ‰‹ã®é§’ãŒåˆ©ã„ã¦ã„ãŸã‚‰ã€ãã®æ‰‹ã¯å–ã‚Šé™¤ã
       for(int direct=0;direct<12 && !isOuteHouchi;direct++) {
-        // •ûŒü‚Ì”½‘Î•ûŒü‚É‚ ‚é‹î‚ğæ“¾
-        Position pos=(Position)gyokuPosition.clone();
+        // æ–¹å‘ã®åå¯¾æ–¹å‘ã«ã‚ã‚‹é§’ã‚’å–å¾—
+          Position pos=(Position)gyokuPosition.clone();
         pos.sub(direct);
         int koma=test.get(pos);
-        // ‚»‚Ì‹î‚ª“G‚Ì‹î‚ÅA‹Ê•ûŒü‚É“®‚¯‚é‚©H
+        // ãã®é§’ãŒæ•µã®é§’ã§ã€ç‰æ–¹å‘ã«å‹•ã‘ã‚‹ã‹ï¼Ÿ
         if (Koma.isEnemy(test.teban,koma) && canMove[direct][koma]) {
-          // “®‚¯‚é‚È‚çA‚±‚Ìè‚Í‰¤è‚ğ•ú’u‚µ‚Ä‚¢‚é‚Ì‚ÅA
-          // ‚±‚Ìè‚ÍAremoved‚É’Ç‰Á‚µ‚È‚¢B
+          // å‹•ã‘ã‚‹ãªã‚‰ã€ã“ã®æ‰‹ã¯ç‹æ‰‹ã‚’æ”¾ç½®ã—ã¦ã„ã‚‹ã®ã§ã€
+          // ã“ã®æ‰‹ã¯ã€removedã«è¿½åŠ ã—ãªã„ã€‚
           isOuteHouchi=true;
           break;
         }
       }
   
-      // ‹Ê‚Ìü‚èi‚W•ûŒüj‚©‚ç‘Šè‚Ì‹î‚Ì”ò‚Ñ—˜‚«‚ª‚ ‚é‚È‚çA‚»‚Ìè‚Íæ‚èœ‚­
+      // ç‰ã®å‘¨ã‚Šï¼ˆï¼˜æ–¹å‘ï¼‰ã‹ã‚‰ç›¸æ‰‹ã®é§’ã®é£›ã³åˆ©ããŒã‚ã‚‹ãªã‚‰ã€ãã®æ‰‹ã¯å–ã‚Šé™¤ã
       for(int direct=0;direct<8 && !isOuteHouchi;direct++) {
-        // •ûŒü‚Ì”½‘Î•ûŒü‚É‚ ‚é‹î‚ğæ“¾
+        // æ–¹å‘ã®åå¯¾æ–¹å‘ã«ã‚ã‚‹é§’ã‚’å–å¾—
         Position pos=(Position)gyokuPosition.clone();
         int koma;
-        // ‚»‚Ì•ûŒü‚Éƒ}ƒX‚ª‹ó‚¢‚Ä‚¢‚éŒÀ‚èA‹î‚ğ’T‚·
+        // ãã®æ–¹å‘ã«ãƒã‚¹ãŒç©ºã„ã¦ã„ã‚‹é™ã‚Šã€é§’ã‚’æ¢ã™
         for(pos.sub(direct),koma=test.get(pos);
          koma!=Koma.WALL;pos.sub(direct),koma=test.get(pos)) {
-          // –¡•û‹î‚Å—˜‚«‚ªÕ‚ç‚ê‚Ä‚¢‚é‚È‚çAƒ`ƒFƒbƒNI‚í‚èB
+          // å‘³æ–¹é§’ã§åˆ©ããŒé®ã‚‰ã‚Œã¦ã„ã‚‹ãªã‚‰ã€ãƒã‚§ãƒƒã‚¯çµ‚ã‚ã‚Šã€‚
           if (Koma.isSelf(test.teban,koma)) break;
-          // Õ‚ç‚ê‚Ä‚¢‚È‚¢‘Šè‚Ì‹î‚Ì—˜‚«‚ª‚ ‚é‚È‚çA‰¤è‚ª‚©‚©‚Á‚Ä‚¢‚éB
+          // é®ã‚‰ã‚Œã¦ã„ãªã„ç›¸æ‰‹ã®é§’ã®åˆ©ããŒã‚ã‚‹ãªã‚‰ã€ç‹æ‰‹ãŒã‹ã‹ã£ã¦ã„ã‚‹ã€‚
           if (Koma.isEnemy(test.teban,koma) && canJump[direct][koma]) {
             isOuteHouchi=true;
             break;
           }
-          // “G‹î‚Å—˜‚«‚ªÕ‚ç‚ê‚Ä‚¢‚é‚©‚çAƒ`ƒFƒbƒNI‚í‚èB
+          // æ•µé§’ã§åˆ©ããŒé®ã‚‰ã‚Œã¦ã„ã‚‹ã‹ã‚‰ã€ãƒã‚§ãƒƒã‚¯çµ‚ã‚ã‚Šã€‚
           if (Koma.isEnemy(test.teban,koma)) {
             break;
           }
@@ -64,149 +65,149 @@ public class GenerateMoves implements Constants,KomaMoves {
     return removed;
   }
   
-  // —^‚¦‚ç‚ê‚½Vector‚ÉAè”ÔA‹î‚Ìí—ŞAˆÚ“®Œ³AˆÚ“®æ‚ğl—¶‚µ‚ÄA
-  // ¬‚éE•s¬‚è‚ğ”»’f‚µ‚È‚ª‚ç¶¬‚µ‚½è‚ğ’Ç‰Á‚·‚éB
-  public static void addTe(Vector v,int teban,int koma,Position from,Position to) {
+  // ä¸ãˆã‚‰ã‚ŒãŸVectorã«ã€æ‰‹ç•ªã€é§’ã®ç¨®é¡ã€ç§»å‹•å…ƒã€ç§»å‹•å…ˆã‚’è€ƒæ…®ã—ã¦ã€
+  // æˆã‚‹ãƒ»ä¸æˆã‚Šã‚’åˆ¤æ–­ã—ãªãŒã‚‰ç”Ÿæˆã—ãŸæ‰‹ã‚’è¿½åŠ ã™ã‚‹ã€‚
+  public static void addTe(List<Te> v,int teban,int koma,Position from,Position to) {
     if (teban==SENTE) {
-      // æè”Ô
+      // å…ˆæ‰‹ç•ª
       if ((Koma.getKomashu(koma)==Koma.KY || Koma.getKomashu(koma)==Koma.FU) && to.dan==1) {
-        // Ô‚©•à‚ª‚P’i–Ú‚Éi‚Ş‚Æ‚«‚É‚ÍA¬‚é‚±‚Æ‚µ‚©‘I‚×‚È‚¢B
+        // é¦™è»Šã‹æ­©ãŒï¼‘æ®µç›®ã«é€²ã‚€ã¨ãã«ã¯ã€æˆã‚‹ã“ã¨ã—ã‹é¸ã¹ãªã„ã€‚
         Te te=new Te(koma,from,to,true);
         v.add(te);
       } else if (Koma.getKomashu(koma)==Koma.KE && to.dan<=2) {
-        // Œj”n‚ª‚Q’i–ÚˆÈã‚Éi‚Ş‚É‚ÍA¬‚é‚±‚Æ‚µ‚©‘I‚×‚È‚¢B
+        // æ¡‚é¦¬ãŒï¼’æ®µç›®ä»¥ä¸Šã«é€²ã‚€æ™‚ã«ã¯ã€æˆã‚‹ã“ã¨ã—ã‹é¸ã¹ãªã„ã€‚
         Te te=new Te(koma,from,to,true);
         v.add(te);
       } else if ((to.dan<=3 || from.dan<=3) && Koma.canPromote(koma)) {
-        // ‹î‚Ì‹‚½ˆÊ’u‚ª‘Šèw‚©Ai‚ŞˆÊ’u‚ª‘Šèw‚ÅA
-        // ‹î‚ª¬‚é‚±‚Æ‚ªo—ˆ‚é‚È‚ç
-        // ¬‚è‚Æ•s¬‚è‚Ì—¼•û‚Ìè‚ğ¶¬
+        // é§’ã®å±…ãŸä½ç½®ãŒç›¸æ‰‹é™£ã‹ã€é€²ã‚€ä½ç½®ãŒç›¸æ‰‹é™£ã§ã€
+        // é§’ãŒæˆã‚‹ã“ã¨ãŒå‡ºæ¥ã‚‹ãªã‚‰
+        // æˆã‚Šã¨ä¸æˆã‚Šã®ä¸¡æ–¹ã®æ‰‹ã‚’ç”Ÿæˆ
         Te te=new Te(koma,from,to,true);
         v.add(te);
         te=new Te(koma,from,to,false);
         v.add(te);
       } else {
-        // •s¬‚è‚Ìè‚Ì‚İ¶¬
+        // ä¸æˆã‚Šã®æ‰‹ã®ã¿ç”Ÿæˆ
         Te te=new Te(koma,from,to,false);
         v.add(te);
       }
     } else {
-      // Œãè”Ô
+      // å¾Œæ‰‹ç•ª
       if ((Koma.getKomashu(koma)==Koma.KY || Koma.getKomashu(koma)==Koma.FU) && to.dan==9) {
-        // Ô‚©•à‚ª‹ã’i–Ú‚Éi‚Ş‚Æ‚«‚É‚ÍA¬‚é‚±‚Æ‚µ‚©‘I‚×‚È‚¢B
+        // é¦™è»Šã‹æ­©ãŒä¹æ®µç›®ã«é€²ã‚€ã¨ãã«ã¯ã€æˆã‚‹ã“ã¨ã—ã‹é¸ã¹ãªã„ã€‚
         Te te=new Te(koma,from,to,true);
         v.add(te);
       } else if (Koma.getKomashu(koma)==Koma.KE && to.dan>=8) {
-        // Œj”n‚ª”ª’i–ÚˆÈã‚Éi‚Ş‚É‚ÍA¬‚é‚±‚Æ‚µ‚©‘I‚×‚È‚¢B
+        // æ¡‚é¦¬ãŒå…«æ®µç›®ä»¥ä¸Šã«é€²ã‚€æ™‚ã«ã¯ã€æˆã‚‹ã“ã¨ã—ã‹é¸ã¹ãªã„ã€‚
         Te te=new Te(koma,from,to,true);
         v.add(te);
       } else if ((to.dan>=7 || from.dan>=7) && Koma.canPromote(koma)) {
-        // ‹î‚Ì‹‚½ˆÊ’u‚ª‘Šèw‚©Ai‚ŞˆÊ’u‚ª‘Šèw‚ÅA
-        // ‹î‚ª¬‚é‚±‚Æ‚ªo—ˆ‚é‚È‚ç
-        // ¬‚è‚Æ•s¬‚è‚Ì—¼•û‚Ìè‚ğ¶¬
+        // é§’ã®å±…ãŸä½ç½®ãŒç›¸æ‰‹é™£ã‹ã€é€²ã‚€ä½ç½®ãŒç›¸æ‰‹é™£ã§ã€
+        // é§’ãŒæˆã‚‹ã“ã¨ãŒå‡ºæ¥ã‚‹ãªã‚‰
+        // æˆã‚Šã¨ä¸æˆã‚Šã®ä¸¡æ–¹ã®æ‰‹ã‚’ç”Ÿæˆ
         Te te=new Te(koma,from,to,true);
         v.add(te);
         te=new Te(koma,from,to,false);
         v.add(te);
       } else {
-        // •s¬‚è‚Ìè‚Ì‚İ¶¬
+        // ä¸æˆã‚Šã®æ‰‹ã®ã¿ç”Ÿæˆ
         Te te=new Te(koma,from,to,false);
         v.add(te);
       }
     }
   }
   
-  // ‘Å‚¿•à‹l‚ß‚É‚È‚Á‚Ä‚¢‚È‚¢‚©‚Ç‚¤‚©ƒ`ƒFƒbƒN‚·‚éŠÖ”
-  // ‘Šè‚Ì‹Ê“ª‚É•à‚ğ‘Å‚Âê‡A
-  // ‚»‚Ìè‚Åˆêèi‚ß‚Ä‚İ‚ÄA‘Šè‚Ìè”Ô‚ÅGenerateLegalMove‚ğs‚¢A
-  // ‹A‚Á‚Ä‚­‚éè‚ª‚È‚©‚Á‚½‚È‚ç‘Å‚¿•à‹l‚ß‚É‚È‚Á‚Ä‚¢‚éB
+  // æ‰“ã¡æ­©è©°ã‚ã«ãªã£ã¦ã„ãªã„ã‹ã©ã†ã‹ãƒã‚§ãƒƒã‚¯ã™ã‚‹é–¢æ•°
+  // ç›¸æ‰‹ã®ç‰é ­ã«æ­©ã‚’æ‰“ã¤å ´åˆã€
+  // ãã®æ‰‹ã§ä¸€æ‰‹é€²ã‚ã¦ã¿ã¦ã€ç›¸æ‰‹ã®æ‰‹ç•ªã§GenerateLegalMoveã‚’è¡Œã„ã€
+  // å¸°ã£ã¦ãã‚‹æ‰‹ãŒãªã‹ã£ãŸãªã‚‰æ‰“ã¡æ­©è©°ã‚ã«ãªã£ã¦ã„ã‚‹ã€‚
   public static boolean isUtiFuDume(Kyokumen k,Te te) {
     if (te.from.suji!=0 && te.from.dan!=0) {
-      // ‹î‚ğ‘Å‚Âè‚Å‚Í‚È‚¢‚Ì‚ÅA‘Å‚¿•à‹l‚ß‚Å‚Í‚È‚¢B
+      // é§’ã‚’æ‰“ã¤æ‰‹ã§ã¯ãªã„ã®ã§ã€æ‰“ã¡æ­©è©°ã‚ã§ã¯ãªã„ã€‚
       return false;
     }
     if (Koma.getKomashu(te.koma)!=Koma.FU) {
-      // •à‚ğ‘Å‚Âè‚Å‚Í‚È‚¢‚Ì‚ÅA‘Å‚¿•à‹l‚ß‚Å‚Í‚È‚¢B
+      // æ­©ã‚’æ‰“ã¤æ‰‹ã§ã¯ãªã„ã®ã§ã€æ‰“ã¡æ­©è©°ã‚ã§ã¯ãªã„ã€‚
       return false;
     }
     int teban;
     int tebanAite;
     if ((te.koma&SENTE)!=0) {
-      // æè‚Ì•à‚ğ‘Å‚Â‚©‚çA©•ª‚Ìè”Ô‚ÍæèA‘Šè‚Ìè”Ô‚ÍŒãè
+      // å…ˆæ‰‹ã®æ­©ã‚’æ‰“ã¤ã‹ã‚‰ã€è‡ªåˆ†ã®æ‰‹ç•ªã¯å…ˆæ‰‹ã€ç›¸æ‰‹ã®æ‰‹ç•ªã¯å¾Œæ‰‹
       teban=SENTE;
       tebanAite=GOTE;
     } else {
-      // ‚»‚¤‚Å‚È‚¢‚ÍA©•ª‚Ìè”Ô‚ÍŒãèA‘Šè‚Ìè”Ô‚Íæè
+      // ãã†ã§ãªã„æ™‚ã¯ã€è‡ªåˆ†ã®æ‰‹ç•ªã¯å¾Œæ‰‹ã€ç›¸æ‰‹ã®æ‰‹ç•ªã¯å…ˆæ‰‹
       teban=GOTE;
       tebanAite=SENTE;
     }
     Position gyokuPositionAite=k.searchGyoku(tebanAite);
     if (teban==SENTE) {
       if (gyokuPositionAite.suji!=te.to.suji || gyokuPositionAite.dan!=te.to.dan-1) {
-        // ‘Šè‚Ì‹Ê‚Ì“ª‚É•à‚ğ‘Å‚Âè‚Å‚Í‚È‚¢‚Ì‚ÅA‘Å‚¿•à‹l‚ß‚É‚È‚Á‚Ä‚¢‚È‚¢B
+        // ç›¸æ‰‹ã®ç‰ã®é ­ã«æ­©ã‚’æ‰“ã¤æ‰‹ã§ã¯ãªã„ã®ã§ã€æ‰“ã¡æ­©è©°ã‚ã«ãªã£ã¦ã„ãªã„ã€‚
         return false;
       }
     } else {
       if (gyokuPositionAite.suji!=te.to.suji || gyokuPositionAite.dan!=te.to.dan+1) {
-        // ‘Šè‚Ì‹Ê‚Ì“ª‚É•à‚ğ‘Å‚Âè‚Å‚Í‚È‚¢‚Ì‚ÅA‘Å‚¿•à‹l‚ß‚É‚È‚Á‚Ä‚¢‚È‚¢B
+        // ç›¸æ‰‹ã®ç‰ã®é ­ã«æ­©ã‚’æ‰“ã¤æ‰‹ã§ã¯ãªã„ã®ã§ã€æ‰“ã¡æ­©è©°ã‚ã«ãªã£ã¦ã„ãªã„ã€‚
         return false;
       }
     }
-    // ÀÛ‚Éˆêèi‚ß‚Ä‚İ‚écB
+    // å®Ÿéš›ã«ä¸€æ‰‹é€²ã‚ã¦ã¿ã‚‹â€¦ã€‚
     Kyokumen test=(Kyokumen)k.clone();
     test.move(te);
     test.teban=tebanAite;
-    // ‚»‚Ì‹Ç–Ê‚ÅA‘Šè‚É‡–@è‚ª‚ ‚é‚©H‚È‚¯‚ê‚ÎA‘Å‚¿•à‹l‚ßB
-    Vector v=generateLegalMoves(test);
+    // ãã®å±€é¢ã§ã€ç›¸æ‰‹ã«åˆæ³•æ‰‹ãŒã‚ã‚‹ã‹ï¼Ÿãªã‘ã‚Œã°ã€æ‰“ã¡æ­©è©°ã‚ã€‚
+    List<Te> v=generateLegalMoves(test);
     if (v.size()==0) {
-      // ‡–@è‚ª‚È‚¢‚Ì‚ÅA‘Å‚¿•à‹l‚ßB
+      // åˆæ³•æ‰‹ãŒãªã„ã®ã§ã€æ‰“ã¡æ­©è©°ã‚ã€‚
       return true;
     }
     return false;
   }
   
-  // —^‚¦‚ç‚ê‚½‹Ç–Ê‚É‚¨‚¯‚é‡–@è‚ğ¶¬‚·‚éB
-  public static Vector generateLegalMoves(Kyokumen k) {
-    Vector v=new Vector();
+  // ä¸ãˆã‚‰ã‚ŒãŸå±€é¢ã«ãŠã‘ã‚‹åˆæ³•æ‰‹ã‚’ç”Ÿæˆã™ã‚‹ã€‚
+  public static List<Te> generateLegalMoves(Kyokumen k) {
+    List<Te> v=new ArrayList<Te>();
 
-    // ”Õã‚Ìè”Ô‚Ì‘¤‚Ì‹î‚ğ“®‚©‚·è‚ğ¶¬
+    // ç›¤ä¸Šã®æ‰‹ç•ªã®å´ã®é§’ã‚’å‹•ã‹ã™æ‰‹ã‚’ç”Ÿæˆ
     for(int suji=1;suji<=9;suji++) {
       for(int dan=1;dan<=9;dan++) {
         Position from=new Position(suji,dan);
         int koma=k.get(from);
-        // ©•ª‚Ì‹î‚Å‚ ‚é‚©‚Ç‚¤‚©Šm”F
+        // è‡ªåˆ†ã®é§’ã§ã‚ã‚‹ã‹ã©ã†ã‹ç¢ºèª
         if (Koma.isSelf(k.teban,koma)) {
-          // Še•ûŒü‚ÉˆÚ“®‚·‚éè‚ğ¶¬
+          // å„æ–¹å‘ã«ç§»å‹•ã™ã‚‹æ‰‹ã‚’ç”Ÿæˆ
           for(int direct=0;direct<12;direct++) {
             if (canMove[direct][koma]) {
-              // ˆÚ“®æ‚ğ¶¬
+              // ç§»å‹•å…ˆã‚’ç”Ÿæˆ
               Position to=new Position(suji+diffSuji[direct],dan+diffDan[direct]);
-              // ˆÚ“®æ‚Í”Õ“à‚©H
+              // ç§»å‹•å…ˆã¯ç›¤å†…ã‹ï¼Ÿ
               if (1<=to.suji && to.suji<=9 && 1<=to.dan && to.dan<=9) {
-                // ˆÚ“®æ‚É©•ª‚Ì‹î‚ª‚È‚¢‚©H
+                // ç§»å‹•å…ˆã«è‡ªåˆ†ã®é§’ãŒãªã„ã‹ï¼Ÿ
                 if (Koma.isSelf(k.teban,k.get(to))) {
-                  // ©•ª‚Ì‹î‚¾‚Á‚½‚çAŸ‚Ì•ûŒü‚ğŒŸ“¢
+                  // è‡ªåˆ†ã®é§’ã ã£ãŸã‚‰ã€æ¬¡ã®æ–¹å‘ã‚’æ¤œè¨
                   continue;
                 }
-                // ¬‚éE•s¬‚è‚ğl—¶‚µ‚È‚ª‚çAè‚ğv‚É’Ç‰Á
+                // æˆã‚‹ãƒ»ä¸æˆã‚Šã‚’è€ƒæ…®ã—ãªãŒã‚‰ã€æ‰‹ã‚’vã«è¿½åŠ 
                 addTe(v,k.teban,koma,from,to);
               }
             }
           }
-          // Še•ûŒü‚Éu”ò‚Ôvè‚ğ¶¬
+          // å„æ–¹å‘ã«ã€Œé£›ã¶ã€æ‰‹ã‚’ç”Ÿæˆ
           for(int direct=0;direct<8;direct++) {
             if (canJump[direct][koma]) {
-              // ‚»‚¿‚ç•ûŒü‚É”ò‚Ô‚±‚Æ‚ªo—ˆ‚é
+              // ãã¡ã‚‰æ–¹å‘ã«é£›ã¶ã“ã¨ãŒå‡ºæ¥ã‚‹
               for(int i=1;i<9;i++) {
-                // ˆÚ“®æ‚ğ¶¬
+                // ç§»å‹•å…ˆã‚’ç”Ÿæˆ
                 Position to=new Position(suji+diffSuji[direct]*i,dan+diffDan[direct]*i);
-                // s‚«æ‚ª”ÕŠO‚¾‚Á‚½‚çA‚»‚±‚É‚Ís‚¯‚È‚¢
+                // è¡Œãå…ˆãŒç›¤å¤–ã ã£ãŸã‚‰ã€ãã“ã«ã¯è¡Œã‘ãªã„
                 if (k.get(to)==Koma.WALL) break;
-                // s‚«æ‚É©•ª‚Ì‹î‚ª‚ ‚Á‚½‚çA‚»‚±‚É‚Ís‚¯‚È‚¢
+                // è¡Œãå…ˆã«è‡ªåˆ†ã®é§’ãŒã‚ã£ãŸã‚‰ã€ãã“ã«ã¯è¡Œã‘ãªã„
                 if (Koma.isSelf(k.teban,k.get(to))) break;
-                // ¬‚éE•s¬‚è‚ğl—¶‚µ‚È‚ª‚çAè‚ğv‚É’Ç‰Á
+                // æˆã‚‹ãƒ»ä¸æˆã‚Šã‚’è€ƒæ…®ã—ãªãŒã‚‰ã€æ‰‹ã‚’vã«è¿½åŠ 
                 addTe(v,k.teban,koma,from,to);
-                // ‹ó‚«¡‚Å‚È‚¯‚ê‚ÎA‚±‚±‚ÅI‚í‚è
+                // ç©ºãå‡ã§ãªã‘ã‚Œã°ã€ã“ã“ã§çµ‚ã‚ã‚Š
                 if (k.get(to)!=Koma.EMPTY) break;
               }
             }
@@ -216,104 +217,105 @@ public class GenerateMoves implements Constants,KomaMoves {
     }
     
     
-    // è”Ô‚Ì‘¤‚Ì‹î‚ğ‘Å‚Âè‚ğ¶¬
+    // æ‰‹ç•ªã®å´ã®é§’ã‚’æ‰“ã¤æ‰‹ã‚’ç”Ÿæˆ
 
-    // è”Ô‚Ì‘¤‚Ì‚¿‹î‚ÅA‚»‚Ì‹î‚ğŠù‚É‘Å‚Á‚½‚©‚Ç‚¤‚©ƒ`ƒFƒbƒN‚·‚é‚½‚ß‚Ì”z—ñ
-    // ‰½‚à‚È‚µA•à`”òÔ‚Ü‚Å
+    // æ‰‹ç•ªã®å´ã®æŒã¡é§’ã§ã€ãã®é§’ã‚’æ—¢ã«æ‰“ã£ãŸã‹ã©ã†ã‹ãƒã‚§ãƒƒã‚¯ã™ã‚‹ãŸã‚ã®é…åˆ—
+    // ä½•ã‚‚ãªã—ã€æ­©ï½é£›è»Šã¾ã§
     boolean isPutted[]={false,false,false,false,false,false,false,false};
 
-    // è”Ô‚Ì‘¤‚Ì‚¿‹î
-    Vector motigoma;
+    // æ‰‹ç•ªã®å´ã®æŒã¡é§’
+    List<Integer> motigoma;
     if (k.teban==SENTE) {
-      motigoma=k.hand[0];
+      motigoma=k.hand.get(0);
     } else {
-      motigoma=k.hand[1];
+      motigoma=k.hand.get(1);
     }
     
-    // ‚Ü‚¸Aè”Ô‚Ì‘¤‚Ì‚¿‹î‚Åƒ‹[ƒv
+    // ã¾ãšã€æ‰‹ç•ªã®å´ã®æŒã¡é§’ã§ãƒ«ãƒ¼ãƒ—
     for(int i=0;i<motigoma.size();i++) {
-      // ‚¿‹î‚ğˆê‚Âæ‚èo‚·
-      int koma=((Integer)motigoma.elementAt(i)).intValue();
-      // ‹î‚Ìí—Ş‚ğ“¾‚é
+      // æŒã¡é§’ã‚’ä¸€ã¤å–ã‚Šå‡ºã™
+      int koma=motigoma.get(i);
+      // é§’ã®ç¨®é¡ã‚’å¾—ã‚‹
       int komashu=Koma.getKomashu(koma);
       if (isPutted[komashu]) {
-        // Šù‚É‚»‚Ì‹î‚ğ‘Å‚Á‚½‚±‚Æ‚ª‚ ‚é‚È‚çA“¯‚¶‹î‚ğ‘Å‚Âè‚ğ¶¬‚·‚é‚Ì‚Í
-        // –³‘Ê‚É‚È‚é‚Ì‚ÅAs‚í‚È‚¢B
+        // æ—¢ã«ãã®é§’ã‚’æ‰“ã£ãŸã“ã¨ãŒã‚ã‚‹ãªã‚‰ã€åŒã˜é§’ã‚’æ‰“ã¤æ‰‹ã‚’ç”Ÿæˆã™ã‚‹ã®ã¯
+        // ç„¡é§„ã«ãªã‚‹ã®ã§ã€è¡Œã‚ãªã„ã€‚
         continue;
       }
-      // ‚±‚Ì‹î‚ğ‘Å‚Á‚½‚±‚Æ‚ª‚ ‚éA‚Æˆó‚ğ•t‚¯‚é
+      // ã“ã®é§’ã‚’æ‰“ã£ãŸã“ã¨ãŒã‚ã‚‹ã€ã¨å°ã‚’ä»˜ã‘ã‚‹
       isPutted[komashu]=true;
-      // ”Õ–Ê‚ÌŠe¡–Ú‚Åƒ‹[ƒv
+      // ç›¤é¢ã®å„å‡ç›®ã§ãƒ«ãƒ¼ãƒ—
       for(int suji=1;suji<=9;suji++) {
-        // “ñ•à‚É‚È‚ç‚È‚¢‚©‚Ç‚¤‚©ƒ`ƒFƒbƒN
+        // äºŒæ­©ã«ãªã‚‰ãªã„ã‹ã©ã†ã‹ãƒã‚§ãƒƒã‚¯
         if (komashu==Koma.FU) {
-          // “ñ•à‚Ìƒ`ƒFƒbƒN—p•Ï”
+          // äºŒæ­©ã®ãƒã‚§ãƒƒã‚¯ç”¨å¤‰æ•°
           boolean isNifu=false;
-          // “ñ•àƒ`ƒFƒbƒN
-          // “¯‚¶‹Ø‚ÉAè”Ô‚Ì‘¤‚Ì•à‚ª‚¢‚È‚¢‚±‚Æ‚ğŠm”F‚·‚é
+          // äºŒæ­©ãƒã‚§ãƒƒã‚¯
+          // åŒã˜ç­‹ã«ã€æ‰‹ç•ªã®å´ã®æ­©ãŒã„ãªã„ã“ã¨ã‚’ç¢ºèªã™ã‚‹
           for(int dan=1;dan<=9;dan++) {
             Position p=new Position(suji,dan);
-            // è”Ô‚Ì‘¤‚Ì•à‚ªA“¯‚¶‹Ø‚É‚¢‚È‚¢‚©‚Ç‚¤‚©ƒ`ƒFƒbƒN‚·‚é
+            // æ‰‹ç•ªã®å´ã®æ­©ãŒã€åŒã˜ç­‹ã«ã„ãªã„ã‹ã©ã†ã‹ãƒã‚§ãƒƒã‚¯ã™ã‚‹
             if (k.get(p)==(k.teban|Koma.FU)) {
-              // “ñ•à‚É‚È‚Á‚Ä‚¢‚éB
+              // äºŒæ­©ã«ãªã£ã¦ã„ã‚‹ã€‚
               isNifu=true;
               break;
             }
           }
           if (isNifu) {
-            // “ñ•à‚É‚È‚Á‚Ä‚¢‚é‚Ì‚ÅA‘Å‚Âè‚ğ¶¬‚µ‚È‚¢B
-            // Ÿ‚Ì‹Ø‚Ö
+            // äºŒæ­©ã«ãªã£ã¦ã„ã‚‹ã®ã§ã€æ‰“ã¤æ‰‹ã‚’ç”Ÿæˆã—ãªã„ã€‚
+            // æ¬¡ã®ç­‹ã¸
             continue;
           }
         }
         for(int dan=1;dan<=9;dan++) {
-          // ‹î‚ªŒj”n‚Ìê‡‚Ìˆµ‚¢
+          // é§’ãŒæ¡‚é¦¬ã®å ´åˆã®æ‰±ã„
           if (komashu==Koma.KE) {
             if (k.teban==SENTE && dan<=2) {
-              // æè‚È‚çA“ñ’i–Ú‚æ‚èã‚ÉŒj”n‚Í‘Å‚Ä‚È‚¢
+              // å…ˆæ‰‹ãªã‚‰ã€äºŒæ®µç›®ã‚ˆã‚Šä¸Šã«æ¡‚é¦¬ã¯æ‰“ã¦ãªã„
               continue;
             } else if (k.teban==GOTE && dan>=8) {
-              // Œãè‚È‚çA”ª’i–Ú‚æ‚è‰º‚ÉŒj”n‚Í‘Å‚Ä‚È‚¢
+              // å¾Œæ‰‹ãªã‚‰ã€å…«æ®µç›®ã‚ˆã‚Šä¸‹ã«æ¡‚é¦¬ã¯æ‰“ã¦ãªã„
               continue;
             }
           }
-          // ‹î‚ª•àA‚Ü‚½‚ÍÔ‚Ìê‡‚Ìˆµ‚¢
+          // é§’ãŒæ­©ã€ã¾ãŸã¯é¦™è»Šã®å ´åˆã®æ‰±ã„
           if (komashu==Koma.FU || komashu==Koma.KY) {
             if (k.teban==SENTE && dan==1) {
-              // æè‚È‚çAˆê’i–Ú‚É•à‚ÆÔ‚Í‘Å‚Ä‚È‚¢
+              // å…ˆæ‰‹ãªã‚‰ã€ä¸€æ®µç›®ã«æ­©ã¨é¦™è»Šã¯æ‰“ã¦ãªã„
               continue;
             } else if (k.teban==GOTE && dan==9) {
-              // Œãè‚È‚çA‹ã’i–Ú‚É•à‚ÆÔ‚Í‘Å‚Ä‚È‚¢
+              // å¾Œæ‰‹ãªã‚‰ã€ä¹æ®µç›®ã«æ­©ã¨é¦™è»Šã¯æ‰“ã¦ãªã„
               continue;
             }
           }
-          // ˆÚ“®Œ³c‹î‚ğ‘Å‚Âè‚ÍA0,0
+          // ç§»å‹•å…ƒâ€¦é§’ã‚’æ‰“ã¤æ‰‹ã¯ã€0,0
           Position from=new Position(0,0);
-          // ˆÚ“®æA‹î‚ğ‘Å‚ÂêŠ
+          // ç§»å‹•å…ˆã€é§’ã‚’æ‰“ã¤å ´æ‰€
           Position to=new Position(suji,dan);
   
-          // ‹ó‚«¡‚Å‚È‚¯‚ê‚ÎA‘Å‚Â–‚Ío—ˆ‚È‚¢B
+          // ç©ºãå‡ã§ãªã‘ã‚Œã°ã€æ‰“ã¤äº‹ã¯å‡ºæ¥ãªã„ã€‚
           if (k.get(to)!=Koma.EMPTY) {
             continue;
           }
-          // è‚Ì¶¬c‹î‚ğ‘Å‚ÂÛ‚É‚ÍAí‚É•s¬‚Å‚ ‚éB
+          // æ‰‹ã®ç”Ÿæˆâ€¦é§’ã‚’æ‰“ã¤éš›ã«ã¯ã€å¸¸ã«ä¸æˆã§ã‚ã‚‹ã€‚
           Te te=new Te(koma,from,to,false);
-          // ‘Å‚¿•à‹l‚ß‚Ì“Áêˆµ‚¢
+          // æ‰“ã¡æ­©è©°ã‚ã®ç‰¹æ®Šæ‰±ã„
           if (isUtiFuDume(k,te)) {
-            // ‘Å‚¿•à‹l‚ß‚È‚çA‚»‚±‚É•à‚Í‘Å‚Ä‚È‚¢
+            // æ‰“ã¡æ­©è©°ã‚ãªã‚‰ã€ãã“ã«æ­©ã¯æ‰“ã¦ãªã„
             continue;
           }
-          // ‹î‚ğ‘Å‚Âè‚ª‰Â”\‚È‚±‚Æ‚ª•ª‚©‚Á‚½‚Ì‚ÅA‡–@è‚É‰Á‚¦‚éB
+          // é§’ã‚’æ‰“ã¤æ‰‹ãŒå¯èƒ½ãªã“ã¨ãŒåˆ†ã‹ã£ãŸã®ã§ã€åˆæ³•æ‰‹ã«åŠ ãˆã‚‹ã€‚
           v.add(te);
         }
       }
     }
     
-    // ¶¬‚µ‚½Šeè‚É‚Â‚¢‚ÄAw‚µ‚Ä‚İ‚Ä
-    // ©•ª‚Ì‹Ê‚É‰¤è‚ª‚©‚©‚Á‚Ä‚¢‚È‚¢‚©‚Ç‚¤‚©ƒ`ƒFƒbƒN‚µA
-    // ‰¤è‚ª‚©‚©‚Á‚Ä‚¢‚éè‚Íæ‚èœ‚­B
+    // ç”Ÿæˆã—ãŸå„æ‰‹ã«ã¤ã„ã¦ã€æŒ‡ã—ã¦ã¿ã¦
+    // è‡ªåˆ†ã®ç‰ã«ç‹æ‰‹ãŒã‹ã‹ã£ã¦ã„ãªã„ã‹ã©ã†ã‹ãƒã‚§ãƒƒã‚¯ã—ã€
+    // ç‹æ‰‹ãŒã‹ã‹ã£ã¦ã„ã‚‹æ‰‹ã¯å–ã‚Šé™¤ãã€‚
     v=removeSelfMate(k,v);
 
     return v;
   }
 }
+

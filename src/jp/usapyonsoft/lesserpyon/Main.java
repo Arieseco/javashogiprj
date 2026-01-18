@@ -1,9 +1,10 @@
 package jp.usapyonsoft.lesserpyon;
-import java.util.Vector;
+import java.util.List;
+import java.util.ArrayList;
 import java.io.*;
 
 public class Main implements Constants {
-  // ‰Šú”Õ–Ê‚ğ—^‚¦‚é
+  // åˆæœŸç›¤é¢ã‚’ä¸ãˆã‚‹
   static final int ShokiBanmen[][]={
     {Koma.GKY,Koma.GKE,Koma.GGI,Koma.GKI,Koma.GOU,Koma.GKI,Koma.GGI,Koma.GKE,Koma.GKY},
     {Koma.EMP,Koma.GHI,Koma.EMP,Koma.EMP,Koma.EMP,Koma.EMP,Koma.EMP,Koma.GKA,Koma.EMP},
@@ -16,13 +17,13 @@ public class Main implements Constants {
     {Koma.SKY,Koma.SKE,Koma.SGI,Koma.SKI,Koma.SOU,Koma.SKI,Koma.SGI,Koma.SKE,Koma.SKY},
   };
   
-  // ƒeƒXƒg—pƒƒCƒ“ŠÖ”
+  // ãƒ†ã‚¹ãƒˆç”¨ãƒ¡ã‚¤ãƒ³é–¢æ•°
   public static void main(String argv[]) {
     try {
       Kyokumen k=new Kyokumen();
       if (argv.length==0) {
-        // ˆø”‚Ìw’è‚ª‚È‚¢ê‡A‰Šú”z’u‚ğg‚¤B
-        // æè”Ô
+        // å¼•æ•°ã®æŒ‡å®šãŒãªã„å ´åˆã€åˆæœŸé…ç½®ã‚’ä½¿ã†ã€‚
+        // å…ˆæ‰‹ç•ª
         k.teban=SENTE;
         for(int dan=1;dan<=9;dan++) {
           for(int suji=9;suji>=1;suji--) {
@@ -30,26 +31,25 @@ public class Main implements Constants {
           }
         }
       } else {
-        // ˆø”‚Åw’è‚ª‚ ‚Á‚½ê‡ACSAŒ`®‚ÌŠû•ˆƒtƒ@ƒCƒ‹‚ğ“Ç‚İ‚ŞB
+        // å¼•æ•°ã§æŒ‡å®šãŒã‚ã£ãŸå ´åˆã€CSAå½¢å¼ã®æ£‹è­œãƒ•ã‚¡ã‚¤ãƒ«ã‚’èª­ã¿è¾¼ã‚€ã€‚
         String csaFileName=argv[0];
         File f=new File(csaFileName);
         BufferedReader in=new BufferedReader(new FileReader(f));
-        Vector v=new Vector();
+        List<String> v=new ArrayList<String>();
         String s;
         while((s=in.readLine())!=null) {
           System.out.println("Read:"+s);
           v.add(s);
         }
-        String csaKifu[]=new String[v.size()];
-        v.copyInto(csaKifu);
+        String csaKifu[]=v.toArray(new String[0]);
         k.ReadCsaKifu(csaKifu);
       }
       System.out.println(k.toString());
 
-      Vector v=GenerateMoves.generateLegalMoves(k);
-      System.out.println("‰Â”\èF"+v.size()+"è");
+      List<Te> v=GenerateMoves.generateLegalMoves(k);
+      System.out.println("å¯èƒ½æ‰‹ï¼š"+v.size()+"æ‰‹");
       for(int i=0;i<v.size();i++) {
-        Te te=(Te)v.elementAt(i);
+        Te te=v.get(i);
         System.out.println(te.toString());
       }
     } catch(Exception ex) {
@@ -57,3 +57,4 @@ public class Main implements Constants {
     }
   }
 }
+
