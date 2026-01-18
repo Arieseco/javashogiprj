@@ -8,17 +8,16 @@ class Kyokumen implements Constants,Cloneable {
   int ban[][];
 
   // 持ち駒
-  @SuppressWarnings("unchecked")
-  List<Integer> hand[];
+  List<List<Integer>> hand;
   
   // 手番
   int teban=SENTE;
   
   public Kyokumen() {
     ban=new int[11][11];
-    hand=(List<Integer>[])new ArrayList[2];
-    hand[0]=new ArrayList<Integer>();
-    hand[1]=new ArrayList<Integer>();
+    hand = new ArrayList<List<Integer>>();
+    hand.add(new ArrayList<Integer>()); // hand.get(0)
+    hand.add(new ArrayList<Integer>()); // hand.get(1)
   }
   
   // 局面のコピーを行う
@@ -33,8 +32,9 @@ class Kyokumen implements Constants,Cloneable {
     }
     
     // 持ち駒のコピー
-    k.hand[0]=new ArrayList<Integer>(hand[0]);
-    k.hand[1]=new ArrayList<Integer>(hand[1]);
+    k.hand = new ArrayList<List<Integer>>();
+    k.hand.add(new ArrayList<Integer>(hand.get(0)));
+    k.hand.add(new ArrayList<Integer>(hand.get(1)));
     
     // 手番のコピー
     k.teban=teban;
@@ -81,27 +81,27 @@ class Kyokumen implements Constants,Cloneable {
     // handに現れた駒を、駒の種類毎に数えていく。
 
     // まず、自分の先手の持ち駒
-    for(int i=0;i<hand[0].size();i++) {
-      int koma=hand[0].get(i);
+    for(int i=0;i<hand.get(0).size();i++) {
+      int koma=hand.get(0).get(i);
       int komaShu=Koma.getKomashu(koma);
       handSente[komaShu]++;
     }
     // 自分の後手の持ち駒
-    for(int i=0;i<hand[1].size();i++) {
-      int koma=hand[1].get(i);
+    for(int i=0;i<hand.get(1).size();i++) {
+      int koma=hand.get(1).get(i);
       int komaShu=Koma.getKomashu(koma);
       handGote[komaShu]++;
     }
 
     // 比較対象の先手の持ち駒
-    for(int i=0;i<k.hand[0].size();i++) {
-      int koma=k.hand[0].get(i);
+    for(int i=0;i<k.hand.get(0).size();i++) {
+      int koma=k.hand.get(0).get(i);
       int komaShu=Koma.getKomashu(koma);
       compareHandSente[komaShu]++;
     }
     // 比較対象の後手の持ち駒
-    for(int i=0;i<k.hand[1].size();i++) {
-      int koma=k.hand[1].get(i);
+    for(int i=0;i<k.hand.get(1).size();i++) {
+      int koma=k.hand.get(1).get(i);
       int komaShu=Koma.getKomashu(koma);
       compareHandGote[komaShu]++;
     }
@@ -114,6 +114,33 @@ class Kyokumen implements Constants,Cloneable {
     
     // 完全に一致した。
     return true;
+  }
+
+  @Override
+  public int hashCode() {
+    int result = teban;
+    // include board
+    for (int suji = 1; suji <= 9; suji++) {
+      for (int dan = 1; dan <= 9; dan++) {
+        result = 31 * result + ban[suji][dan];
+      }
+    }
+    // include hand counts (order-independent as equals does)
+    int handSente[] = new int[Koma.HI + 1];
+    int handGote[] = new int[Koma.HI + 1];
+    for (int i = 0; i < hand.get(0).size(); i++) {
+      int koma = hand.get(0).get(i);
+      handSente[Koma.getKomashu(koma)]++;
+    }
+    for (int i = 0; i < hand.get(1).size(); i++) {
+      int koma = hand.get(1).get(i);
+      handGote[Koma.getKomashu(koma)]++;
+    }
+    for (int i = Koma.FU; i <= Koma.HI; i++) {
+      result = 31 * result + handSente[i];
+      result = 31 * result + handGote[i];
+    }
+    return result;
   }
   
   // ある位置にある駒を取得する
@@ -142,7 +169,7 @@ class Kyokumen implements Constants,Cloneable {
         koma=koma & 0x07;
         // 後手の駒としてのフラグをセット
         koma=koma | GOTE;
-        hand[1].add(Integer.valueOf(koma));
+        hand.get(1).add(Integer.valueOf(koma));
       } else {
         // 取った駒が後手の駒なら先手の持ち駒に。
         int koma=get(te.to);
@@ -150,26 +177,26 @@ class Kyokumen implements Constants,Cloneable {
         koma=koma & 0x07;
         // 先手の駒としてのフラグをセット
         koma=koma | SENTE;
-        hand[0].add(Integer.valueOf(koma));
+        hand.get(0).add(Integer.valueOf(koma));
       }
     }
     if (te.from.suji==0) {
       // 持ち駒を打った
         if (Koma.isSente(te.koma)) {
         // 先手の駒なら、先手の持ち駒を減らす。
-        for(int i=0;i<hand[0].size();i++) {
-          int koma=hand[0].get(i);
+        for(int i=0;i<hand.get(0).size();i++) {
+          int koma=hand.get(0).get(i);
           if (koma==te.koma) {
-            hand[0].remove(i);
+            hand.get(0).remove(i);
             break;
           }
         }
       } else {
         // 後手の駒を打ったはずなので、後手の持ち駒を減らす
-        for(int i=0;i<hand[1].size();i++) {
-          int koma=hand[1].get(i);
+        for(int i=0;i<hand.get(1).size();i++) {
+          int koma=hand.get(1).get(i);
           if (koma==te.koma) {
-            hand[1].remove(i);
+            hand.get(1).remove(i);
             break;
           }
         }
@@ -327,10 +354,10 @@ class Kyokumen implements Constants,Cloneable {
     // 持ち駒をhandにしまう。
     for(int i=Koma.FU;i<Koma.HI;i++) {
       for(int j=0;j<motigoma[0][i];j++) {
-        hand[0].add(Integer.valueOf(i|SENTE));
+        hand.get(0).add(Integer.valueOf(i|SENTE));
       }
       for(int j=0;j<motigoma[1][i];j++) {
-        hand[1].add(Integer.valueOf(i|GOTE));
+        hand.get(1).add(Integer.valueOf(i|GOTE));
       }
     }
   }
@@ -340,8 +367,8 @@ class Kyokumen implements Constants,Cloneable {
     String s="";
     // 後手持ち駒表示
     s+="後手持ち駒：";
-    for(int i=0;i<hand[1].size();i++) {
-      s+=Koma.toString(hand[1].get(i));
+    for(int i=0;i<hand.get(1).size();i++) {
+      s+=Koma.toString(hand.get(1).get(i));
     }
     s+="\n";
     // 盤面表示
@@ -359,8 +386,8 @@ class Kyokumen implements Constants,Cloneable {
     }
     // 先手持ち駒表示
     s+="先手持ち駒：";
-    for(int i=0;i<hand[0].size();i++) {
-      s+=Koma.toString(hand[0].get(i));
+    for(int i=0;i<hand.get(0).size();i++) {
+      s+=Koma.toString(hand.get(0).get(i));
     }
     s+="\n";
     return s;

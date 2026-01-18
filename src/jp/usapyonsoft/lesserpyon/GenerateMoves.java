@@ -226,9 +226,9 @@ public class GenerateMoves implements Constants,KomaMoves {
     // 手番の側の持ち駒
     List<Integer> motigoma;
     if (k.teban==SENTE) {
-      motigoma=k.hand[0];
+      motigoma=k.hand.get(0);
     } else {
-      motigoma=k.hand[1];
+      motigoma=k.hand.get(1);
     }
     
     // まず、手番の側の持ち駒でループ

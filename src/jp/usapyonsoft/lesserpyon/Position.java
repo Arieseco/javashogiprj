@@ -23,15 +23,23 @@ class Position implements Cloneable,KomaMoves {
   public boolean equals(Position p) {
     return (p.suji==suji && p.dan==dan);
   }
+  @Override
   public boolean equals(Object o) {
-    Position p=(Position)o;
-    if (p==null) return false;
+    if (this == o) return true;
+    if (!(o instanceof Position)) return false;
+    Position p = (Position) o;
     return equals(p);
   }
   
   // コピーを返す
+  @Override
   public Object clone() {
     return new Position(suji,dan);
+  }
+
+  @Override
+  public int hashCode() {
+    return suji * 31 + dan;
   }
   
   // ある方向への動きを行う

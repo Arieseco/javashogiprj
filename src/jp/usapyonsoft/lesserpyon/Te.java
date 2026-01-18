@@ -26,6 +26,15 @@ public class Te implements Cloneable,Constants {
   public Object clone() {
     return new Te(koma,from,to,promote);
   }
+
+  @Override
+  public int hashCode() {
+    int result = Integer.hashCode(koma);
+    result = 31 * result + (from == null ? 0 : from.hashCode());
+    result = 31 * result + (to == null ? 0 : to.hashCode());
+    result = 31 * result + (promote ? 1231 : 1237);
+    return result;
+  }
   
   // 手を文字列で表現する。
   public String toString() {
